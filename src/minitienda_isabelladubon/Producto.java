@@ -4,16 +4,18 @@
  */
 package minitienda_isabelladubon;
 
+import java.util.Random;
+
 public class Producto {
     private String producto;
-    private final int ID;
+    private final String ID;
     private double precio;
     private int stock;
 
     //constructor
-    public Producto(String producto, int ID, double precio, int stock) {
+    public Producto(String producto, String ID, double precio, int stock) {
         this.producto = producto;
-        this.ID = ID;
+        this.ID = generarID();
         this.precio = precio;
         this.stock = stock;
     }
@@ -42,8 +44,15 @@ public class Producto {
     public void setStock(int stock) {
         this.stock = stock;
     }
-
-    public int getID() {
+private String generarID(){
+        Random random = new Random();
+        String IDgenerado = "";
+        for (int i = 0; i <= 8; i++){ //genera un codigo random de 8 numeros
+            IDgenerado += random.nextInt(9);
+        }
+        return IDgenerado;
+    }
+    public String getID() {
         return ID;
     }
 
