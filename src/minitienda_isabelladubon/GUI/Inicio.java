@@ -4,12 +4,14 @@
  */
 package minitienda_isabelladubon.GUI;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author miria
  */
 public class Inicio extends javax.swing.JFrame {
-
+    ArrayList<String> listaUsuarios = new ArrayList<>();
     /**
      * Creates new form Principal
      */
@@ -208,17 +210,17 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_comoJugarActionPerformed
 
     private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosActionPerformed
-        UsuarioNew newUser = new UsuarioNew();
+        UsuarioNew newUser = new UsuarioNew(listaUsuarios);
         newUser.setVisible(true);
         newUser.setLocationRelativeTo(null);
         newUser.setResizable(false);
     }//GEN-LAST:event_usuariosActionPerformed
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
-        Principal jugar = new Principal();
-        jugar.setVisible(true);
-        jugar.setLocationRelativeTo(null);
-        jugar.setResizable(false);
+        ElegirUser elegir = new ElegirUser(listaUsuarios);
+        elegir.setVisible(true);
+        elegir.setLocationRelativeTo(null);
+        elegir.setResizable(false);
     }//GEN-LAST:event_jugarActionPerformed
 
 
