@@ -17,6 +17,7 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
+        setDefaultCloseOperation(Inicio.DO_NOTHING_ON_CLOSE);
     }
 
     /**
@@ -75,6 +76,11 @@ public class Inicio extends javax.swing.JFrame {
         salir.setFont(new java.awt.Font("Bodoni MT Black", 1, 36)); // NOI18N
         salir.setForeground(new java.awt.Color(255, 255, 204));
         salir.setText("Salir");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
 
         usuarios.setBackground(new java.awt.Color(60, 1, 1));
         usuarios.setFont(new java.awt.Font("Bodoni MT Black", 1, 30)); // NOI18N
@@ -222,6 +228,10 @@ public class Inicio extends javax.swing.JFrame {
         elegir.setLocationRelativeTo(null);
         elegir.setResizable(false);
     }//GEN-LAST:event_jugarActionPerformed
+
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_salirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
