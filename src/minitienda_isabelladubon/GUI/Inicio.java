@@ -5,19 +5,26 @@
 package minitienda_isabelladubon.GUI;
 
 import java.util.ArrayList;
+import minitienda_isabelladubon.Usuario;
 
 /**
  *
  * @author miria
  */
 public class Inicio extends javax.swing.JFrame {
-    ArrayList<String> listaUsuarios = new ArrayList<>();
+    /* variables globales de seleccion de usuario y
+        lista de usuarios */
+    ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+    public static Usuario seleccion;
+    UsuarioNew newUser = new UsuarioNew(listaUsuarios);
+    ElegirUser elegir = new ElegirUser(listaUsuarios, seleccion);
     /**
      * Creates new form Principal
      */
     public Inicio() {
         initComponents();
         setDefaultCloseOperation(Inicio.DO_NOTHING_ON_CLOSE);
+
     }
 
     /**
@@ -47,15 +54,17 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
         jPanel1.setForeground(new java.awt.Color(254, 253, 235));
 
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/minitienda_isabelladubon/GUI/Logo sin slogan.png"))); // NOI18N
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/Logo.png"))); // NOI18N
         logo.setText("jLabel2");
 
         jPanel3.setBackground(new java.awt.Color(253, 202, 51));
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         comoJugar.setBackground(new java.awt.Color(60, 1, 1));
         comoJugar.setFont(new java.awt.Font("Bodoni MT Black", 1, 36)); // NOI18N
         comoJugar.setForeground(new java.awt.Color(255, 255, 204));
         comoJugar.setText("Como Jugar");
+        comoJugar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         comoJugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comoJugarActionPerformed(evt);
@@ -66,6 +75,7 @@ public class Inicio extends javax.swing.JFrame {
         jugar.setFont(new java.awt.Font("Bodoni MT Black", 1, 36)); // NOI18N
         jugar.setForeground(new java.awt.Color(255, 255, 204));
         jugar.setText("Jugar");
+        jugar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jugarActionPerformed(evt);
@@ -76,6 +86,7 @@ public class Inicio extends javax.swing.JFrame {
         salir.setFont(new java.awt.Font("Bodoni MT Black", 1, 36)); // NOI18N
         salir.setForeground(new java.awt.Color(255, 255, 204));
         salir.setText("Salir");
+        salir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirActionPerformed(evt);
@@ -86,6 +97,7 @@ public class Inicio extends javax.swing.JFrame {
         usuarios.setFont(new java.awt.Font("Bodoni MT Black", 1, 30)); // NOI18N
         usuarios.setForeground(new java.awt.Color(255, 255, 204));
         usuarios.setText("Nuevo Usuario");
+        usuarios.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         usuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usuariosActionPerformed(evt);
@@ -141,6 +153,7 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(145, 216, 200));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setForeground(new java.awt.Color(145, 216, 200));
 
         subTitulo2.setFont(new java.awt.Font("Bodoni MT Black", 0, 24)); // NOI18N
@@ -172,7 +185,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(subTitulo1)
                     .addComponent(subTitulo2))
-                .addContainerGap(411, Short.MAX_VALUE))
+                .addContainerGap(435, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,21 +229,27 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_comoJugarActionPerformed
 
     private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosActionPerformed
-        UsuarioNew newUser = new UsuarioNew(listaUsuarios);
+        //abre la ventana de agregar usuario
         newUser.setVisible(true);
-        newUser.setLocationRelativeTo(null);
-        newUser.setResizable(false);
+        newUser.setLocationRelativeTo(null);//la pone en el centro
+        newUser.setResizable(false); //evita que se cambie de tamaño
     }//GEN-LAST:event_usuariosActionPerformed
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
-        ElegirUser elegir = new ElegirUser(listaUsuarios);
+        //abre la ventana de elegir usuario antes de jugar
+        ElegirUser elegir = new ElegirUser(listaUsuarios, seleccion);
         elegir.setVisible(true);
-        elegir.setLocationRelativeTo(null);
-        elegir.setResizable(false);
+        elegir.setLocationRelativeTo(null);//la pone en el centro
+        elegir.setResizable(false);//evita que se cambie de tamaño
     }//GEN-LAST:event_jugarActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        //cierra todas las ventanas al salir
         this.dispose();
+        elegir.dispose();
+        newUser.dispose();
+        
+        
     }//GEN-LAST:event_salirActionPerformed
 
 

@@ -6,17 +6,19 @@ package minitienda_isabelladubon.GUI;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import minitienda_isabelladubon.Usuario;
 
 /**
  *
  * @author miria
  */
 public class ElegirUser extends javax.swing.JFrame {
-    private ArrayList<String> usuariosLista;
+    private ArrayList<Usuario> usuariosLista;
+    private Usuario seleccion;
     /**
      * Creates new form ElegirUser
      */
-    public ElegirUser(ArrayList<String> listaUsuarios) {
+    public ElegirUser(ArrayList<Usuario> listaUsuarios, Usuario seleccion) {
         initComponents();
         setDefaultCloseOperation(ElegirUser.HIDE_ON_CLOSE);
         this.usuariosLista = listaUsuarios;
@@ -201,15 +203,25 @@ public class ElegirUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosActionPerformed
-        
+        String user = "";
+        if (usuarios.getSelectedItem() != null){
+            user = usuarios.getSelectedItem().toString();
+        }
+        for (int i = 0; i < usuariosLista.size(); i++){
+            Usuario u = usuariosLista.get(i);
+            if (u.getNombre().equals(user)){
+                seleccion = u;
+                break;
+            }
+        }
     }//GEN-LAST:event_usuariosActionPerformed
 
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
-        boolean hayUsers = usuariosLista.isEmpty();
-        if (hayUsers){
+        boolean sinUsers = usuariosLista.isEmpty();
+        if (sinUsers){
             JOptionPane.showMessageDialog(this, "No hay usuarios! D: Crea uno primero.");
         }else{
-            Principal jugar = new Principal();
+            Main jugar = new Main(usuariosLista, seleccion);
             jugar.setVisible(true);
             jugar.setLocationRelativeTo(null);
             jugar.setResizable(false);
@@ -219,7 +231,7 @@ public class ElegirUser extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         usuarios.removeAllItems();
         for (int i = 0; i < usuariosLista.size(); i++){
-            String usuario = usuariosLista.get(i);
+            String usuario = usuariosLista.get(i).getNombre();
             usuarios.addItem(usuario);
         }
     }//GEN-LAST:event_formWindowOpened

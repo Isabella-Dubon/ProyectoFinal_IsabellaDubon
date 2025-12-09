@@ -6,17 +6,18 @@ package minitienda_isabelladubon.GUI;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import minitienda_isabelladubon.Usuario;
 
 /**
  *
  * @author miria
  */
 public class UsuarioNew extends javax.swing.JFrame {
-    private ArrayList<String> usuarios;
+    private ArrayList<Usuario> usuarios;
     /**
      * Creates new form UsuarioNew
      */
-    public UsuarioNew(ArrayList<String> listaUsuarios) {
+    public UsuarioNew(ArrayList<Usuario> listaUsuarios) {
         initComponents();
         setDefaultCloseOperation(UsuarioNew.DISPOSE_ON_CLOSE);
         this.usuarios = listaUsuarios;
@@ -46,6 +47,7 @@ public class UsuarioNew extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(145, 216, 200));
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setForeground(new java.awt.Color(145, 216, 200));
 
         subTitulo2.setFont(new java.awt.Font("Bodoni MT Black", 0, 24)); // NOI18N
@@ -77,7 +79,7 @@ public class UsuarioNew extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(subTitulo1)
                     .addComponent(subTitulo2))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,11 +103,13 @@ public class UsuarioNew extends javax.swing.JFrame {
         jPanel4.setForeground(new java.awt.Color(254, 253, 235));
 
         jPanel1.setBackground(new java.awt.Color(253, 202, 51));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         Guardar.setBackground(new java.awt.Color(60, 1, 1));
         Guardar.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         Guardar.setForeground(new java.awt.Color(255, 255, 204));
         Guardar.setText("Guardar");
+        Guardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardarActionPerformed(evt);
@@ -113,8 +117,9 @@ public class UsuarioNew extends javax.swing.JFrame {
         });
 
         txtUser.setBackground(new java.awt.Color(255, 255, 204));
-        txtUser.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        txtUser.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         txtUser.setForeground(new java.awt.Color(60, 1, 1));
+        txtUser.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserActionPerformed(evt);
@@ -125,11 +130,13 @@ public class UsuarioNew extends javax.swing.JFrame {
         salir1.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         salir1.setForeground(new java.awt.Color(255, 255, 204));
         salir1.setText("Ingrese su nombre de usuario");
+        salir1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         Limpiar.setBackground(new java.awt.Color(60, 1, 1));
         Limpiar.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         Limpiar.setForeground(new java.awt.Color(255, 255, 204));
         Limpiar.setText("Limpiar");
+        Limpiar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LimpiarActionPerformed(evt);
@@ -166,7 +173,7 @@ public class UsuarioNew extends javax.swing.JFrame {
                 .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(27, 27, 27)
@@ -209,7 +216,7 @@ public class UsuarioNew extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -220,12 +227,30 @@ public class UsuarioNew extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUserActionPerformed
 
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
-        txtUser.setText("");
+        txtUser.setText(""); //limpia el campo de texto
     }//GEN-LAST:event_LimpiarActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        usuarios.add(txtUser.getText());
-        JOptionPane.showMessageDialog(this, "Usuario registrado!");
+        String newUsuario = txtUser.getText();
+        if (newUsuario.trim().isEmpty()){ //valida si el campo de texto esta vacio
+            JOptionPane.showMessageDialog(this, "Usuario vacio!");
+            return;
+        }
+        if (newUsuario.length() > 15){ //valida que no sea muy largo para aparecer en pantalla
+            JOptionPane.showMessageDialog(this, "Usuario muy largo! (max 15 caracteres)");
+                return;
+        }
+        //valida si ya existe el usuario (mayusculas no importan)
+        for (int i = 0; i < usuarios.size(); i++){
+            if (usuarios.get(i).getNombre().equals(newUsuario)){ 
+                JOptionPane.showMessageDialog(this, "Usuario ya existe.");
+                return;
+            }
+        }
+        //al pasar las validaciones, agrega el usuario
+        usuarios.add(new Usuario(newUsuario,0,1));
+        JOptionPane.showMessageDialog(this, "Usuario registrado correctamente!");
+        
     }//GEN-LAST:event_GuardarActionPerformed
 
    

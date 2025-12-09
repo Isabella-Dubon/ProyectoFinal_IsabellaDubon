@@ -10,17 +10,19 @@ import minitienda_isabelladubon.GUI.Inicio;
 public class MiniTienda_IsabellaDubon {
 
     public static void main(String[] args) {
-        ArrayList<Producto> comida = new ArrayList<>();
-        ArrayList<Producto> bebidas = new ArrayList<>();
-        ArrayList<Producto> extras = new ArrayList<>();
-        comida.add(new Producto("Pie de Limon","",40,15));
-        comida.add(new Producto("Mini Pinia Loca","",25,15));
-        comida.add(new Producto("Gomitas Enchiladas","",20,15));
-        comida.add(new Producto("Pan de Minimo","",40,15));
-        bebidas.add(new Producto("Te Frio","",20,15));
-        bebidas.add(new Producto("Cafe","",12,15));
-        extras.add(new Producto("Jabon Artesanal","",60,15));
-        extras.add(new Producto("Pulcera","",30,15));
+        Producto[] comida = new Producto[4];
+        Producto[] bebidas = new Producto[2];
+        Producto[] extras = new Producto[2];
+        comida[0] = new Producto("Pie de Limon","",40,10);
+        comida[1] = new Producto("Mini Pinia Loca","",25,10);
+        comida[2] = new Producto("Gomitas Enchiladas","",20,10);
+        comida[3] = new Producto("Pan de Minimo","",40,10);
+        bebidas[0] = new Producto("Te Frio","",20,10);
+        bebidas[0] = new Producto("Cafe","",12,10);
+        bebidas[0] = new Producto("Jabon Artesanal","",60,10);
+        bebidas[0] = new Producto("Pulcera","",30,10);
+        
+        //Inicializa el menu principal
         Inicio inicio = new Inicio();
         inicio.setVisible(true);
         inicio.setLocationRelativeTo(null);
