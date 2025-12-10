@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import minitienda_isabelladubon.Usuario;
 import minitienda_isabelladubon.GUI.PantallaMain;
+import minitienda_isabelladubon.Producto;
 
 /**
  *
@@ -17,24 +18,22 @@ import minitienda_isabelladubon.GUI.PantallaMain;
 public class Main extends javax.swing.JFrame {
     private ArrayList<Usuario> usuariosLista;
     private Usuario seleccion; 
-    private String nivelUser;
     private String diaUser;
     private String dineroUser;
-    private JPanel PantallaMain;
+    private Producto[] tienda;
+    PantallaMain principal = new PantallaMain();
 
     /**
      * Creates new form Main
      */
-    public Main(ArrayList<Usuario> listaUsuarios, Usuario seleccion) {
+    public Main(ArrayList<Usuario> listaUsuarios, Usuario seleccion, Producto[] tienda) {
         initComponents();
+        this.tienda = tienda;
+        this.seleccion = seleccion;
+        this.usuariosLista = listaUsuarios;
         
         //muestra el nombre de usuario 
         usuarioNombre.setText(seleccion.getNombre());
-        
-        //muestra el dia del usuario en el JLabel
-        int n = seleccion.getNivel();
-        nivelUser = Integer.toString(n);
-        usuarioNivelLbl.setText(nivelUser);
         
         //muestra el dia del usuario en el JLabel
         int d = seleccion.getDiaEnJuego();
@@ -43,7 +42,7 @@ public class Main extends javax.swing.JFrame {
         
         //muestra el dinero del usuario en el JLabel
         double m = seleccion.getDinero();
-        dineroUser = Double.toString(d);
+        dineroUser = Double.toString(m);
         usuarioDineroLbl.setText(dineroUser);
         
         setDefaultCloseOperation(ElegirUser.DISPOSE_ON_CLOSE);
@@ -74,8 +73,6 @@ public class Main extends javax.swing.JFrame {
         dinero = new javax.swing.JLabel();
         usuarioDineroLbl = new javax.swing.JLabel();
         lempiras = new javax.swing.JLabel();
-        nivel = new javax.swing.JLabel();
-        usuarioNivelLbl = new javax.swing.JLabel();
         contenido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -194,14 +191,6 @@ public class Main extends javax.swing.JFrame {
         lempiras.setForeground(new java.awt.Color(211, 55, 49));
         lempiras.setText("L.");
 
-        nivel.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
-        nivel.setForeground(new java.awt.Color(211, 55, 49));
-        nivel.setText("Nivel");
-
-        usuarioNivelLbl.setFont(new java.awt.Font("OCR A Extended", 1, 20)); // NOI18N
-        usuarioNivelLbl.setForeground(new java.awt.Color(211, 55, 49));
-        usuarioNivelLbl.setText("1");
-
         javax.swing.GroupLayout NivelLayout = new javax.swing.GroupLayout(Nivel);
         Nivel.setLayout(NivelLayout);
         NivelLayout.setHorizontalGroup(
@@ -210,21 +199,15 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(NivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(NivelLayout.createSequentialGroup()
+                        .addGap(0, 7, Short.MAX_VALUE)
                         .addGroup(NivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(NivelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NivelLayout.createSequentialGroup()
                                 .addComponent(lempiras, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(usuarioDineroLbl))
-                            .addGroup(NivelLayout.createSequentialGroup()
-                                .addGroup(NivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dinero)
-                                    .addGroup(NivelLayout.createSequentialGroup()
-                                        .addComponent(nivel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(usuarioNivelLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(usuarioDineroLbl)
+                                .addGap(12, 12, 12))
+                            .addComponent(dinero, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(NivelLayout.createSequentialGroup()
                         .addComponent(usuarioNombre)
@@ -234,19 +217,17 @@ public class Main extends javax.swing.JFrame {
             NivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NivelLayout.createSequentialGroup()
                 .addComponent(usuarioNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(NivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(NivelLayout.createSequentialGroup()
-                        .addGroup(NivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nivel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(usuarioNivelLbl))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(NivelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(dinero, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(NivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(usuarioDineroLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lempiras)))))
+                            .addComponent(lempiras)
+                            .addComponent(usuarioDineroLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -262,7 +243,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(subTitulo1)
                     .addComponent(subTitulo2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(Nivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -281,8 +262,8 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(divisor, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(Nivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(Nivel, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 150));
@@ -309,18 +290,21 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        PantallaMain principal = new PantallaMain();
-        MostrarPanel(principal);
+    principal.setTienda(tienda);
+    principal.setSeleccion(seleccion);
+    principal.alAbrirMain();
+    MostrarPanel(principal);
     }//GEN-LAST:event_formWindowOpened
 
     private void MostrarPanel(JPanel panel){
+        contenido.removeAll();
         panel.setSize(720, 450);
         panel.setLocation(0, 0);
-        contenido.removeAll();
         contenido.add(panel);
         contenido.revalidate();
         contenido.repaint();
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Nivel;
     private javax.swing.JPanel contenido;
@@ -333,13 +317,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lempiras;
-    private javax.swing.JLabel nivel;
     private javax.swing.JLabel subTitulo1;
     private javax.swing.JLabel subTitulo2;
     private javax.swing.JLabel titulo;
     private javax.swing.JLabel usuarioDiaLbl;
     private javax.swing.JLabel usuarioDineroLbl;
-    private javax.swing.JLabel usuarioNivelLbl;
     private javax.swing.JLabel usuarioNombre;
     // End of variables declaration//GEN-END:variables
 }

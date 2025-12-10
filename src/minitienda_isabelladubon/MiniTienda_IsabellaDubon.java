@@ -27,7 +27,7 @@ public class MiniTienda_IsabellaDubon {
         tienda[7] = new Producto("Pulcera","",30,10);
         
         //Inicializa el menu principal
-        Inicio inicio = new Inicio();
+        Inicio inicio = new Inicio(tienda);
         inicio.setVisible(true);
         inicio.setLocationRelativeTo(null);
         inicio.setResizable(false);
@@ -37,24 +37,19 @@ public class MiniTienda_IsabellaDubon {
         ArrayList<Producto> productos = new ArrayList<>();
         ArrayList<Integer> cantidad = new ArrayList<>();
         Random random = new Random();
-        int nivel = usuario.getNivel();
+        int dia = usuario.getDiaEnJuego();
         Pedido pedido = null;
-        switch (nivel){ //niveles de pedidos
-            case 1: 
-                //nivel 1, genera solo un tipo de producto, cantidad Max = 3
-                int index1 = random.nextInt(9);
-                Producto producto1 = tienda[index1];
-                productos.add(producto1);
-                int cant = random.nextInt(4);
-                cantidad.add(cant);
-                pedido = new Pedido(productos, cantidad, numPedido);
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
+        if (dia < 5){ //dia 1-4, genera solo un tipo de producto, cantidad Max = 3
+            int index1 = random.nextInt(8);
+            Producto producto1 = tienda[index1];
+            productos.add(producto1);
+            int cant = random.nextInt(1, 4);
+            cantidad.add(cant);
+            pedido = new Pedido(productos, cantidad, numPedido);
         }
         return pedido;
     }
+    
+    
     
 }

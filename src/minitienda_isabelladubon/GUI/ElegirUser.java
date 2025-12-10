@@ -6,6 +6,7 @@ package minitienda_isabelladubon.GUI;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import minitienda_isabelladubon.Producto;
 import minitienda_isabelladubon.Usuario;
 
 /**
@@ -15,13 +16,16 @@ import minitienda_isabelladubon.Usuario;
 public class ElegirUser extends javax.swing.JFrame {
     private ArrayList<Usuario> usuariosLista;
     private Usuario seleccion;
+    private Producto[] tienda;
     /**
      * Creates new form ElegirUser
      */
-    public ElegirUser(ArrayList<Usuario> listaUsuarios, Usuario seleccion) {
+    public ElegirUser(ArrayList<Usuario> listaUsuarios, Usuario seleccion, Producto[] tienda) {
         initComponents();
         setDefaultCloseOperation(ElegirUser.HIDE_ON_CLOSE);
         this.usuariosLista = listaUsuarios;
+        this.seleccion = seleccion;
+        this.tienda = tienda;
     }
 
     /**
@@ -221,10 +225,11 @@ public class ElegirUser extends javax.swing.JFrame {
         if (sinUsers){
             JOptionPane.showMessageDialog(this, "No hay usuarios! D: Crea uno primero.");
         }else{
-            Main jugar = new Main(usuariosLista, seleccion);
+            Main jugar = new Main(usuariosLista, seleccion, tienda);
             jugar.setVisible(true);
             jugar.setLocationRelativeTo(null);
             jugar.setResizable(false);
+            this.dispose();
         }
     }//GEN-LAST:event_siguienteActionPerformed
 

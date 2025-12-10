@@ -248,7 +248,7 @@ public class UsuarioNew extends javax.swing.JFrame {
             }
         }
         //al pasar las validaciones, agrega el usuario
-        usuarios.add(new Usuario(newUsuario,0.0,1,1));
+        usuarios.add(new Usuario(newUsuario,0.00,1));
         JOptionPane.showMessageDialog(this, "Usuario registrado correctamente!");
         
     }//GEN-LAST:event_GuardarActionPerformed

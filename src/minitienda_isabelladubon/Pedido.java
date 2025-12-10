@@ -41,5 +41,18 @@ public class Pedido {
         this.numPedido = numPedido;
     }
 
+    @Override
+    public String toString() {
+        String pedidos = "";
+        String cants = "";
+        for (int i = 0; i < cantidades.size(); i++){
+            cants += cantidades.get(i) + "\n";
+            for (int j = 0; j < pedido.size(); j++){ 
+                pedidos += pedido.get(j).getProducto() + "\n";
+            }
+        }
+        return cants + " " + pedidos ;
+    }
+
     
 }

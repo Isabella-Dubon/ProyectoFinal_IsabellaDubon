@@ -3,34 +3,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package minitienda_isabelladubon.GUI;
+import java.awt.Color;
+import java.util.HashSet;
 import javax.swing.ImageIcon;
 import java.util.Random;
 import minitienda_isabelladubon.MiniTienda_IsabellaDubon;
+import minitienda_isabelladubon.Producto;
+import minitienda_isabelladubon.Usuario;
 
 public class PantallaMain extends javax.swing.JPanel {
     Random random = new Random();
+    MiniTienda_IsabellaDubon logica = new MiniTienda_IsabellaDubon();
+    private Producto[] tienda;
+    private Usuario seleccion;
+    private int numPedido = 1;
+    private String pedido = "";
+    private int contClientes = 0;
+    private int maxClientes = random.nextInt(3, 6);
     /**
      * Creates new form PantallaMain
      */
-    public PantallaMain() {
+    public PantallaMain(){
         initComponents();
-        //genera un png de cliente random
-        int numero = random.nextInt(1, 5);
-        switch (numero){
-            case 1:
-                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente1.png")));
-                break;
-            case 2:
-                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente2.png")));
-                break;
-            case 3:
-                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente3.png")));
-                break;
-            case 4:
-                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente4.png")));
-                break;
-        }
-        
+    }
+    public PantallaMain(Producto[] tienda, Usuario seleccion) {
+        initComponents();
+        this.tienda = tienda;
+        this.seleccion = seleccion;
     }
 
     /**
@@ -44,7 +43,11 @@ public class PantallaMain extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         pedidoClientePnl = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        pedidoLbl = new javax.swing.JLabel();
+        PedidoLbl = new javax.swing.JLabel();
+        pedidoNumLbl = new javax.swing.JLabel();
+        next = new javax.swing.JButton();
+        nextCliente = new javax.swing.JButton();
         stand = new javax.swing.JLabel();
         cliente = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
@@ -55,29 +58,68 @@ public class PantallaMain extends javax.swing.JPanel {
         pedidoClientePnl.setBackground(new java.awt.Color(211, 55, 49));
         pedidoClientePnl.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEtchedBorder()));
 
+        pedidoLbl.setFont(new java.awt.Font("Bodoni MT Black", 1, 14)); // NOI18N
+        pedidoLbl.setForeground(new java.awt.Color(0, 0, 0));
+        pedidoLbl.setText("jLabel1");
+
+        PedidoLbl.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
+        PedidoLbl.setForeground(new java.awt.Color(0, 0, 0));
+        PedidoLbl.setText("Pedido");
+
+        pedidoNumLbl.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
+        pedidoNumLbl.setForeground(new java.awt.Color(0, 0, 0));
+        pedidoNumLbl.setText("1");
+
         javax.swing.GroupLayout pedidoClientePnlLayout = new javax.swing.GroupLayout(pedidoClientePnl);
         pedidoClientePnl.setLayout(pedidoClientePnlLayout);
         pedidoClientePnlLayout.setHorizontalGroup(
             pedidoClientePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 234, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pedidoClientePnlLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pedidoClientePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pedidoLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                    .addGroup(pedidoClientePnlLayout.createSequentialGroup()
+                        .addComponent(PedidoLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pedidoNumLbl)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         pedidoClientePnlLayout.setVerticalGroup(
             pedidoClientePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 124, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pedidoClientePnlLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pedidoClientePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PedidoLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pedidoNumLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pedidoLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel1.add(pedidoClientePnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 240, 130));
 
-        jButton1.setBackground(new java.awt.Color(60, 1, 1));
-        jButton1.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 204));
-        jButton1.setText("Siguiente Cliente>>");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        next.setBackground(new java.awt.Color(60, 1, 1));
+        next.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        next.setForeground(new java.awt.Color(255, 255, 204));
+        next.setText("Siguiente >>");
+        next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                nextActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, 50));
+        jPanel1.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, -1, 50));
+
+        nextCliente.setBackground(new java.awt.Color(60, 1, 1));
+        nextCliente.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        nextCliente.setForeground(new java.awt.Color(255, 255, 204));
+        nextCliente.setText("Siguiente Cliente>>");
+        nextCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextClienteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(nextCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, 50));
 
         stand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/Untitled4_20251209175549.png"))); // NOI18N
         jPanel1.add(stand, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 730, 450));
@@ -102,7 +144,7 @@ public class PantallaMain extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void nextClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextClienteActionPerformed
         //genera un png de cliente random cada ronda
         int numero = random.nextInt(1, 5);
         switch (numero){
@@ -119,15 +161,63 @@ public class PantallaMain extends javax.swing.JPanel {
                 cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente4.png")));
                 break;
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        pedido = logica.generarPedido(seleccion, tienda, numPedido).toString();
+        pedidoLbl.setText(pedido);
+        numPedido++;
+        String num = Integer.toString(numPedido);
+        pedidoNumLbl.setText(num);
+        contClientes++;
+        if (contClientes == maxClientes){
+            nextCliente.setVisible(false);
+            next.setVisible(true);
+        }
+    }//GEN-LAST:event_nextClienteActionPerformed
 
+    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nextActionPerformed
 
+    public void setTienda(Producto[] tienda) {
+        this.tienda = tienda;
+    }
+
+    public void setSeleccion(Usuario seleccion) {
+        this.seleccion = seleccion;
+    }
+
+    public void alAbrirMain(){
+        //genera un png de cliente random
+        int numero = random.nextInt(1, 5);
+        switch (numero){
+            case 1:
+                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente1.png")));
+                break;
+            case 2:
+                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente2.png")));
+                break;
+            case 3:
+                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente3.png")));
+                break;
+            case 4:
+                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente4.png")));
+                break;
+        }
+        
+        //imprime el pedido generado aleatoriamente
+        pedido = logica.generarPedido(seleccion, tienda, numPedido).toString();
+        pedidoLbl.setText(pedido);
+        next.setVisible(false);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel PedidoLbl;
     private javax.swing.JLabel cliente;
     private javax.swing.JLabel fondo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton next;
+    private javax.swing.JButton nextCliente;
     private javax.swing.JPanel pedidoClientePnl;
+    private javax.swing.JLabel pedidoLbl;
+    private javax.swing.JLabel pedidoNumLbl;
     private javax.swing.JLabel stand;
     // End of variables declaration//GEN-END:variables
 }

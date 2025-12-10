@@ -5,6 +5,7 @@
 package minitienda_isabelladubon.GUI;
 
 import java.util.ArrayList;
+import minitienda_isabelladubon.Producto;
 import minitienda_isabelladubon.Usuario;
 
 /**
@@ -15,15 +16,18 @@ public class Inicio extends javax.swing.JFrame {
     /* variables globales de seleccion de usuario y
         lista de usuarios */
     ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+    private Producto[] tienda;
     public static Usuario seleccion;
     UsuarioNew newUser = new UsuarioNew(listaUsuarios);
-    ElegirUser elegir = new ElegirUser(listaUsuarios, seleccion);
+    ElegirUser elegir;
     /**
      * Creates new form Principal
      */
-    public Inicio() {
+    public Inicio(Producto[] tienda) {
         initComponents();
+        this.tienda = tienda;
         setDefaultCloseOperation(Inicio.DO_NOTHING_ON_CLOSE);
+        elegir = new ElegirUser(listaUsuarios, seleccion, tienda);
 
     }
 
@@ -237,7 +241,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
         //abre la ventana de elegir usuario antes de jugar
-        ElegirUser elegir = new ElegirUser(listaUsuarios, seleccion);
+        elegir = new ElegirUser(listaUsuarios, seleccion, tienda);
         elegir.setVisible(true);
         elegir.setLocationRelativeTo(null);//la pone en el centro
         elegir.setResizable(false);//evita que se cambie de tamaño

@@ -8,13 +8,15 @@ public class Usuario {
     private String nombre;
     private double dinero;
     private int diaEnJuego;
-    private int nivel;
 
-    public Usuario(String nombre, double dinero, int diaEnJuego, int nivel) {
+    public Usuario() {
+    }
+
+    
+    public Usuario(String nombre, double dinero, int diaEnJuego) {
         this.nombre = nombre;
         this.dinero = dinero;
         this.diaEnJuego = diaEnJuego;
-        this.nivel = nivel;
     }
 
     public String getNombre() {
@@ -41,20 +43,11 @@ public class Usuario {
         this.diaEnJuego = diaEnJuego;
     }
 
-    public int getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-
     @Override
     public String toString() {
         return "Nombre: " + nombre + "\n" +
                 "Dinero: " + dinero + "\n" +
-                "Dia " + diaEnJuego + "\n" +
-                "Nivel " + nivel ;
+                "Dia " + diaEnJuego + "\n" ;
     }
 
     
