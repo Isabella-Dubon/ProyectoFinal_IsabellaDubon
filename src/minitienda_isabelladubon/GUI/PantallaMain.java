@@ -3,18 +3,35 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package minitienda_isabelladubon.GUI;
+import javax.swing.ImageIcon;
+import java.util.Random;
 
 /**
  *
  * @author miria
  */
 public class PantallaMain extends javax.swing.JPanel {
-
+    Random random = new Random();
     /**
      * Creates new form PantallaMain
      */
     public PantallaMain() {
         initComponents();
+        int numero = random.nextInt(1, 5);
+        switch (numero){
+            case 1:
+                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente1.png")));
+                break;
+            case 2:
+                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente2.png")));
+                break;
+            case 3:
+                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente3.png")));
+                break;
+            case 4:
+                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente4.png")));
+                break;
+        }
     }
 
     /**
@@ -27,19 +44,35 @@ public class PantallaMain extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        stand = new javax.swing.JLabel();
+        cliente = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/Untitled4_20251209175549.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 730, 450));
+        jButton1.setBackground(new java.awt.Color(60, 1, 1));
+        jButton1.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 204));
+        jButton1.setText("Siguiente Cliente>>");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/imageedit_2_8375449600.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 450));
+        stand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/Untitled4_20251209175549.png"))); // NOI18N
+        jPanel1.add(stand, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 730, 450));
+
+        cliente.setText("jLabel2");
+        jPanel1.add(cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 220, 330));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/imageedit_2_8375449600.jpg"))); // NOI18N
+        fondo.setText("jLabel1");
+        fondo.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 450));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -53,10 +86,30 @@ public class PantallaMain extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int numero = random.nextInt(1, 5);
+        switch (numero){
+            case 1:
+                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente1.png")));
+                break;
+            case 2:
+                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente2.png")));
+                break;
+            case 3:
+                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente3.png")));
+                break;
+            case 4:
+                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente4.png")));
+                break;
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel cliente;
+    private javax.swing.JLabel fondo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel stand;
     // End of variables declaration//GEN-END:variables
 }

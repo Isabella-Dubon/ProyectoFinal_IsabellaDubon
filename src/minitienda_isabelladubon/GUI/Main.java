@@ -5,6 +5,7 @@
 package minitienda_isabelladubon.GUI;
 
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import minitienda_isabelladubon.Usuario;
 import minitienda_isabelladubon.GUI.PantallaMain;
@@ -263,7 +264,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, -1));
 
-        contenido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        contenido.setLayout(new java.awt.CardLayout());
         jPanel4.add(contenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 720, 450));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -285,7 +286,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        MostrarPanel(PantallaMain);
+        PantallaMain principal = new PantallaMain();
+        MostrarPanel(principal);
     }//GEN-LAST:event_formWindowOpened
 
     private void MostrarPanel(JPanel panel){
