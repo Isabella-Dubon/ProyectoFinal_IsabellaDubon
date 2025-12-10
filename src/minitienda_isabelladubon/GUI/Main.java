@@ -32,6 +32,11 @@ public class Main extends javax.swing.JFrame {
         usuarioNombre.setText(seleccion.getNombre());
         
         //muestra el dia del usuario en el JLabel
+        int n = seleccion.getNivel();
+        nivelUser = Integer.toString(n);
+        usuarioNivelLbl.setText(nivelUser);
+        
+        //muestra el dia del usuario en el JLabel
         int d = seleccion.getDiaEnJuego();
         diaUser = Integer.toString(d);
         usuarioDiaLbl.setText(diaUser);
@@ -69,6 +74,8 @@ public class Main extends javax.swing.JFrame {
         dinero = new javax.swing.JLabel();
         usuarioDineroLbl = new javax.swing.JLabel();
         lempiras = new javax.swing.JLabel();
+        nivel = new javax.swing.JLabel();
+        usuarioNivelLbl = new javax.swing.JLabel();
         contenido = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,7 +90,7 @@ public class Main extends javax.swing.JFrame {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(248, 117, 132));
-        jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.MatteBorder(null), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
 
         jButton1.setBackground(new java.awt.Color(60, 1, 1));
         jButton1.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
@@ -115,7 +122,7 @@ public class Main extends javax.swing.JFrame {
         jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 160, 450));
 
         jPanel2.setBackground(new java.awt.Color(145, 216, 200));
-        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jPanel2.setForeground(new java.awt.Color(145, 216, 200));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
 
@@ -136,15 +143,15 @@ public class Main extends javax.swing.JFrame {
         divisor.setText("|");
 
         Nivel.setBackground(new java.awt.Color(253, 202, 51));
-        Nivel.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.MatteBorder(null), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        Nivel.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
 
         usuarioNombre.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
         usuarioNombre.setForeground(new java.awt.Color(211, 55, 49));
-        usuarioNombre.setText("NJHGFYDXCGHBJK");
+        usuarioNombre.setText("USUARIO");
         usuarioNombre.setToolTipText("");
 
         jPanel5.setBackground(new java.awt.Color(211, 55, 49));
-        jPanel5.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanel5.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
 
         usuarioDiaLbl.setFont(new java.awt.Font("Gill Sans Ultra Bold Condensed", 0, 48)); // NOI18N
         usuarioDiaLbl.setForeground(new java.awt.Color(60, 1, 1));
@@ -181,11 +188,19 @@ public class Main extends javax.swing.JFrame {
 
         usuarioDineroLbl.setFont(new java.awt.Font("OCR A Extended", 0, 20)); // NOI18N
         usuarioDineroLbl.setForeground(new java.awt.Color(211, 55, 49));
-        usuarioDineroLbl.setText("Dinero:");
+        usuarioDineroLbl.setText("0.0");
 
         lempiras.setFont(new java.awt.Font("OCR A Extended", 1, 20)); // NOI18N
         lempiras.setForeground(new java.awt.Color(211, 55, 49));
         lempiras.setText("L.");
+
+        nivel.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
+        nivel.setForeground(new java.awt.Color(211, 55, 49));
+        nivel.setText("Nivel");
+
+        usuarioNivelLbl.setFont(new java.awt.Font("OCR A Extended", 1, 20)); // NOI18N
+        usuarioNivelLbl.setForeground(new java.awt.Color(211, 55, 49));
+        usuarioNivelLbl.setText("1");
 
         javax.swing.GroupLayout NivelLayout = new javax.swing.GroupLayout(Nivel);
         Nivel.setLayout(NivelLayout);
@@ -197,13 +212,18 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(NivelLayout.createSequentialGroup()
                         .addGroup(NivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(NivelLayout.createSequentialGroup()
-                                .addComponent(dinero)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(NivelLayout.createSequentialGroup()
-                                .addGap(0, 6, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(lempiras, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(usuarioDineroLbl)))
+                                .addComponent(usuarioDineroLbl))
+                            .addGroup(NivelLayout.createSequentialGroup()
+                                .addGroup(NivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dinero)
+                                    .addGroup(NivelLayout.createSequentialGroup()
+                                        .addComponent(nivel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(usuarioNivelLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(NivelLayout.createSequentialGroup()
@@ -214,18 +234,19 @@ public class Main extends javax.swing.JFrame {
             NivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NivelLayout.createSequentialGroup()
                 .addComponent(usuarioNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(NivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(NivelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(NivelLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGroup(NivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nivel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(usuarioNivelLbl))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(dinero, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(NivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(usuarioDineroLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lempiras))
-                        .addContainerGap())))
+                            .addComponent(lempiras)))))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -241,12 +262,11 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(subTitulo1)
                     .addComponent(subTitulo2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(Nivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Nivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,9 +280,12 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(subTitulo2))
                     .addComponent(divisor, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(Nivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, -1));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 150));
 
         contenido.setLayout(new java.awt.CardLayout());
         jPanel4.add(contenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 720, 450));
@@ -310,11 +333,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lempiras;
+    private javax.swing.JLabel nivel;
     private javax.swing.JLabel subTitulo1;
     private javax.swing.JLabel subTitulo2;
     private javax.swing.JLabel titulo;
     private javax.swing.JLabel usuarioDiaLbl;
     private javax.swing.JLabel usuarioDineroLbl;
+    private javax.swing.JLabel usuarioNivelLbl;
     private javax.swing.JLabel usuarioNombre;
     // End of variables declaration//GEN-END:variables
 }

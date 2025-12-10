@@ -5,11 +5,8 @@
 package minitienda_isabelladubon.GUI;
 import javax.swing.ImageIcon;
 import java.util.Random;
+import minitienda_isabelladubon.MiniTienda_IsabellaDubon;
 
-/**
- *
- * @author miria
- */
 public class PantallaMain extends javax.swing.JPanel {
     Random random = new Random();
     /**
@@ -17,6 +14,7 @@ public class PantallaMain extends javax.swing.JPanel {
      */
     public PantallaMain() {
         initComponents();
+        //genera un png de cliente random
         int numero = random.nextInt(1, 5);
         switch (numero){
             case 1:
@@ -32,6 +30,7 @@ public class PantallaMain extends javax.swing.JPanel {
                 cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente4.png")));
                 break;
         }
+        
     }
 
     /**
@@ -44,6 +43,7 @@ public class PantallaMain extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        pedidoClientePnl = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         stand = new javax.swing.JLabel();
         cliente = new javax.swing.JLabel();
@@ -51,6 +51,22 @@ public class PantallaMain extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pedidoClientePnl.setBackground(new java.awt.Color(211, 55, 49));
+        pedidoClientePnl.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEtchedBorder()));
+
+        javax.swing.GroupLayout pedidoClientePnlLayout = new javax.swing.GroupLayout(pedidoClientePnl);
+        pedidoClientePnl.setLayout(pedidoClientePnlLayout);
+        pedidoClientePnlLayout.setHorizontalGroup(
+            pedidoClientePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 234, Short.MAX_VALUE)
+        );
+        pedidoClientePnlLayout.setVerticalGroup(
+            pedidoClientePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 124, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(pedidoClientePnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 240, 130));
 
         jButton1.setBackground(new java.awt.Color(60, 1, 1));
         jButton1.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
@@ -87,6 +103,7 @@ public class PantallaMain extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //genera un png de cliente random cada ronda
         int numero = random.nextInt(1, 5);
         switch (numero){
             case 1:
@@ -110,6 +127,7 @@ public class PantallaMain extends javax.swing.JPanel {
     private javax.swing.JLabel fondo;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel pedidoClientePnl;
     private javax.swing.JLabel stand;
     // End of variables declaration//GEN-END:variables
 }

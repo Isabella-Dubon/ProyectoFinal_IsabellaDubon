@@ -7,44 +7,24 @@ package minitienda_isabelladubon;
 import java.util.ArrayList;
 
 public class Pedido {
-    private ArrayList<Producto> comida;
-    private ArrayList<Producto> bebida;
-    private ArrayList<Producto> extra;
+    private ArrayList<Producto> pedido;
     private ArrayList<Integer> cantidades;
     private int numPedido;
 
-    public Pedido(ArrayList<Producto> comida, ArrayList<Producto> bebida, ArrayList<Producto> extra, ArrayList<Integer> cantidades, int numPedido) {
-        this.comida = comida;
-        this.bebida = bebida;
-        this.extra = extra;
+    public Pedido(ArrayList<Producto> pedido, ArrayList<Integer> cantidades, int numPedido) {
+        this.pedido = pedido;
         this.cantidades = cantidades;
         this.numPedido = numPedido;
     }
 
-    public ArrayList<Producto> getComida() {
-        return comida;
+    public ArrayList<Producto> getPedido() {
+        return pedido;
     }
 
-    public void setComida(ArrayList<Producto> comida) {
-        this.comida = comida;
+    public void setPedido(ArrayList<Producto> pedido) {
+        this.pedido = pedido;
     }
-
-    public ArrayList<Producto> getBebida() {
-        return bebida;
-    }
-
-    public void setBebida(ArrayList<Producto> bebida) {
-        this.bebida = bebida;
-    }
-
-    public ArrayList<Producto> getExtra() {
-        return extra;
-    }
-
-    public void setExtra(ArrayList<Producto> extra) {
-        this.extra = extra;
-    }
-
+    
     public ArrayList<Integer> getCantidades() {
         return cantidades;
     }
