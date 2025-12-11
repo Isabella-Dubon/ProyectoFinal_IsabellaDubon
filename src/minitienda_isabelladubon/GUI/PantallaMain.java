@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.util.HashSet;
 import javax.swing.ImageIcon;
 import java.util.Random;
+import javax.swing.JOptionPane;
 import minitienda_isabelladubon.MiniTienda_IsabellaDubon;
 import minitienda_isabelladubon.Producto;
 import minitienda_isabelladubon.Usuario;
@@ -20,16 +21,18 @@ public class PantallaMain extends javax.swing.JPanel {
     private String pedido = "";
     private int contClientes = 0;
     private int maxClientes = random.nextInt(3, 6);
+    private Main mainFrame;
     /**
      * Creates new form PantallaMain
      */
     public PantallaMain(){
         initComponents();
     }
-    public PantallaMain(Producto[] tienda, Usuario seleccion) {
+    public PantallaMain(Producto[] tienda, Usuario seleccion, Main mainFrame) {
         initComponents();
         this.tienda = tienda;
         this.seleccion = seleccion;
+        this.mainFrame = mainFrame;
     }
 
     /**
@@ -161,20 +164,26 @@ public class PantallaMain extends javax.swing.JPanel {
                 cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente4.png")));
                 break;
         }
-        pedido = logica.generarPedido(seleccion, tienda, numPedido).toString();
-        pedidoLbl.setText(pedido);
-        numPedido++;
+        pedido = logica.generarPedido(seleccion, tienda, numPedido).toString(); 
+        pedidoLbl.setText(pedido); //imprime el pedido generado
+        numPedido++; //sube el numero de pedido y muestra en pantalla
         String num = Integer.toString(numPedido);
         pedidoNumLbl.setText(num);
-        contClientes++;
-        if (contClientes == maxClientes){
+        contClientes++; //cantidad de clientes atendidos
+        if (contClientes == maxClientes){ //al llegar al max, se sube el num de dia
             nextCliente.setVisible(false);
             next.setVisible(true);
+            seleccion.setDiaEnJuego(seleccion.getDiaEnJuego()+1);
+            JOptionPane.showMessageDialog(this, "Has completado el dia :D");
+            JOptionPane.showMessageDialog(this, "Comienza nuevo Dia !");
+            contClientes = 0;
+            mainFrame.actualizarDia();
         }
     }//GEN-LAST:event_nextClienteActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        // TODO add your handling code here:
+        next.setVisible(false);
+        nextCliente.setVisible(true);
     }//GEN-LAST:event_nextActionPerformed
 
     public void setTienda(Producto[] tienda) {

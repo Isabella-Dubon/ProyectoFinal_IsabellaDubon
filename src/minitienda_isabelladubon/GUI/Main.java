@@ -21,11 +21,15 @@ public class Main extends javax.swing.JFrame {
     private String diaUser;
     private String dineroUser;
     private Producto[] tienda;
-    PantallaMain principal = new PantallaMain();
+    PantallaMain principal = new PantallaMain(tienda, seleccion, this);
+    PantallaPedido pedidos = new PantallaPedido(tienda);
 
     /**
      * Creates new form Main
      */
+    public Main(){
+        initComponents();
+    }
     public Main(ArrayList<Usuario> listaUsuarios, Usuario seleccion, Producto[] tienda) {
         initComponents();
         this.tienda = tienda;
@@ -59,7 +63,8 @@ public class Main extends javax.swing.JFrame {
 
         jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        pedidoBtn = new javax.swing.JButton();
+        principalBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         subTitulo2 = new javax.swing.JLabel();
         titulo = new javax.swing.JLabel();
@@ -89,13 +94,23 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(248, 117, 132));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
 
-        jButton1.setBackground(new java.awt.Color(60, 1, 1));
-        jButton1.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 204));
-        jButton1.setText("Principal");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        pedidoBtn.setBackground(new java.awt.Color(60, 1, 1));
+        pedidoBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        pedidoBtn.setForeground(new java.awt.Color(255, 255, 204));
+        pedidoBtn.setText("Pedido");
+        pedidoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                pedidoBtnActionPerformed(evt);
+            }
+        });
+
+        principalBtn.setBackground(new java.awt.Color(60, 1, 1));
+        principalBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        principalBtn.setForeground(new java.awt.Color(255, 255, 204));
+        principalBtn.setText("Principal");
+        principalBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                principalBtnActionPerformed(evt);
             }
         });
 
@@ -103,17 +118,27 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pedidoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(principalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(385, Short.MAX_VALUE))
+                .addGap(76, 76, 76)
+                .addComponent(pedidoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(315, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(principalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(375, Short.MAX_VALUE)))
         );
 
         jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 160, 450));
@@ -285,9 +310,9 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void pedidoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoBtnActionPerformed
+        MostrarPanel(pedidos);
+    }//GEN-LAST:event_pedidoBtnActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     principal.setTienda(tienda);
@@ -296,7 +321,11 @@ public class Main extends javax.swing.JFrame {
     MostrarPanel(principal);
     }//GEN-LAST:event_formWindowOpened
 
-    private void MostrarPanel(JPanel panel){
+    private void principalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_principalBtnActionPerformed
+        MostrarPanel(principal);
+    }//GEN-LAST:event_principalBtnActionPerformed
+
+    public void MostrarPanel(JPanel panel){
         contenido.removeAll();
         panel.setSize(720, 450);
         panel.setLocation(0, 0);
@@ -305,18 +334,25 @@ public class Main extends javax.swing.JFrame {
         contenido.repaint();
     }
     
+    public void actualizarDia (){
+        int dia = seleccion.getDiaEnJuego();
+        String diaCadena = Integer.toString(dia);
+        usuarioDiaLbl.setText(diaCadena);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Nivel;
     private javax.swing.JPanel contenido;
     private javax.swing.JLabel dia;
     private javax.swing.JLabel dinero;
     private javax.swing.JLabel divisor;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lempiras;
+    private javax.swing.JButton pedidoBtn;
+    private javax.swing.JButton principalBtn;
     private javax.swing.JLabel subTitulo1;
     private javax.swing.JLabel subTitulo2;
     private javax.swing.JLabel titulo;
