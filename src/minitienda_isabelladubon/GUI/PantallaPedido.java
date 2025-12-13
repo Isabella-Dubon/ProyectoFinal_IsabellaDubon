@@ -6,7 +6,11 @@ package minitienda_isabelladubon.GUI;
 
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import minitienda_isabelladubon.GestorPedido;
+import minitienda_isabelladubon.Pedido;
 import minitienda_isabelladubon.Producto;
+import minitienda_isabelladubon.Usuario;
 
 /**
  *
@@ -14,8 +18,8 @@ import minitienda_isabelladubon.Producto;
  */
 public class PantallaPedido extends javax.swing.JPanel {
     private Producto[] tienda;
-    private ArrayList<Producto> productos;
-    private ArrayList<Integer> cantidades;
+    private GestorPedido gestor;
+    private Main mainFrame;
     private int cantPies = 0;
     private int cantPinias = 0;
     private int cantGoms = 0;
@@ -24,12 +28,38 @@ public class PantallaPedido extends javax.swing.JPanel {
     private int cantTe = 0;
     private int cantJbns = 0;
     private int cantBisu = 0;
+    private String pedido = "";
+    private int numPedido;
+    private PantallaMain principal;
+    Producto pie;
+    Producto pinia;
+    Producto gomitas;
+    Producto pan;
+    Producto cafe;
+    Producto te;
+    Producto jabon;
+    Producto bisu;
+    private final Usuario seleccion;
+    private Pedido pedidoActual;
     /**
      * Creates new form PantallaPedido
      */
-    public PantallaPedido(Producto[] tienda) {
+    
+    public PantallaPedido(Producto[] tienda, Usuario seleccion, PantallaMain principal, Main mainFrame) {
         initComponents();
         this.tienda = tienda;
+        this.seleccion = seleccion;
+        this.principal = principal;
+        this.mainFrame = mainFrame;
+        pie = tienda[0];
+        pinia = tienda[1];
+        gomitas = tienda[2];
+        pan = tienda[3];
+        cafe = tienda[4];
+        te = tienda[5];
+        jabon = tienda[6];
+        bisu = tienda[7];
+        
     }
 
     /**
@@ -149,7 +179,7 @@ public class PantallaPedido extends javax.swing.JPanel {
         panelPie.add(pieMenosBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 43, 40));
 
         pieMasBtn.setBackground(new java.awt.Color(60, 1, 1));
-        pieMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        pieMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         pieMasBtn.setForeground(new java.awt.Color(255, 255, 204));
         pieMasBtn.setText("+");
         pieMasBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -229,7 +259,7 @@ public class PantallaPedido extends javax.swing.JPanel {
         panelPan.add(panMenosBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 43, 40));
 
         panMasBtn.setBackground(new java.awt.Color(60, 1, 1));
-        panMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        panMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         panMasBtn.setForeground(new java.awt.Color(255, 255, 204));
         panMasBtn.setText("+");
         panMasBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -309,7 +339,7 @@ public class PantallaPedido extends javax.swing.JPanel {
         panelPinia.add(piniaMenosBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 43, 40));
 
         piniaMasBtn.setBackground(new java.awt.Color(60, 1, 1));
-        piniaMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        piniaMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         piniaMasBtn.setForeground(new java.awt.Color(255, 255, 204));
         piniaMasBtn.setText("+");
         piniaMasBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -389,7 +419,7 @@ public class PantallaPedido extends javax.swing.JPanel {
         panelGomitas.add(gomMenosBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 43, 40));
 
         gomMasBtn.setBackground(new java.awt.Color(60, 1, 1));
-        gomMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        gomMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         gomMasBtn.setForeground(new java.awt.Color(255, 255, 204));
         gomMasBtn.setText("+");
         gomMasBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -469,7 +499,7 @@ public class PantallaPedido extends javax.swing.JPanel {
         panelBisu.add(bisuMenosBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 43, 40));
 
         bisuMasBtn.setBackground(new java.awt.Color(60, 1, 1));
-        bisuMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        bisuMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         bisuMasBtn.setForeground(new java.awt.Color(255, 255, 204));
         bisuMasBtn.setText("+");
         bisuMasBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -549,7 +579,7 @@ public class PantallaPedido extends javax.swing.JPanel {
         panelJabones.add(jabMenosBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 43, 40));
 
         jabMasBtn.setBackground(new java.awt.Color(60, 1, 1));
-        jabMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jabMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         jabMasBtn.setForeground(new java.awt.Color(255, 255, 204));
         jabMasBtn.setText("+");
         jabMasBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -629,7 +659,7 @@ public class PantallaPedido extends javax.swing.JPanel {
         panelTe.add(teMenosBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 43, 40));
 
         teMasBtn.setBackground(new java.awt.Color(60, 1, 1));
-        teMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        teMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         teMasBtn.setForeground(new java.awt.Color(255, 255, 204));
         teMasBtn.setText("+");
         teMasBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -709,7 +739,7 @@ public class PantallaPedido extends javax.swing.JPanel {
         panelCafe.add(cafeMenosBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 43, 40));
 
         cafeMasBtn.setBackground(new java.awt.Color(60, 1, 1));
-        cafeMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        cafeMasBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         cafeMasBtn.setForeground(new java.awt.Color(255, 255, 204));
         cafeMasBtn.setText("+");
         cafeMasBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -790,107 +820,178 @@ public class PantallaPedido extends javax.swing.JPanel {
     }//GEN-LAST:event_nextClienteActionPerformed
 
     private void entregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entregarPedidoActionPerformed
+        int numPedido = this.pedidoActual.getNumPedido();
+        ArrayList<Producto> productos = new ArrayList<>();
+        ArrayList<Integer> cantidades = new ArrayList<>();
         if (cantPies > 0){
             cantidades.add(cantPies);
+            productos.add(pie);
+        }
+        if (cantPinias > 0){
+            cantidades.add(cantPinias);
+            productos.add(pinia);
+        }
+        if (cantGoms > 0){
+            cantidades.add(cantGoms);
+            productos.add(gomitas);
+        }
+        if (cantPanes > 0){
+            cantidades.add(cantPanes);
+            productos.add(pan);
+        }
+        if (cantCafe > 0){
+            cantidades.add(cantCafe);
+            productos.add(cafe);
+        }
+        if (cantTe > 0){
+            cantidades.add(cantTe);
+            productos.add(te);
+        }
+        if (cantJbns > 0){
+            cantidades.add(cantJbns);
+            productos.add(jabon);
+        }
+        if (cantBisu > 0){
+            cantidades.add(cantBisu);
+            productos.add(bisu);
+        }
+        Pedido pedidoIngresado = new Pedido(productos, cantidades, numPedido);
+        boolean correcto = gestor.validarEntrega(this.pedidoActual, pedidoIngresado);;
+        
+        if (correcto) {
+            JOptionPane.showMessageDialog(this, "Pedido entregado correctamente!");
+        }else {
+            JOptionPane.showMessageDialog(this, "Pedido incorrecto!");
         }
     }//GEN-LAST:event_entregarPedidoActionPerformed
 
     private void pieMasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pieMasBtnActionPerformed
-        cantPies = añadirCant(cantPies);
-        cantidades(cantPies, pieCont);
+        this.cantPies++;
+        cantidades(this.cantPies, pieCont);
     }//GEN-LAST:event_pieMasBtnActionPerformed
 
     private void pieMenosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pieMenosBtnActionPerformed
-        cantPies = restarCant(cantPies);
-        cantidades(cantPies, pieCont);
+        if (this.cantPies > 0){
+            this.cantPies--;
+        }
+        cantidades(this.cantPies, pieCont);
     }//GEN-LAST:event_pieMenosBtnActionPerformed
 
     private void piniaMasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piniaMasBtnActionPerformed
-        cantPinias = añadirCant(cantPinias);
-        cantidades(cantPinias, piniaCont);
+        this.cantPinias++;
+        cantidades(this.cantPinias, piniaCont);
     }//GEN-LAST:event_piniaMasBtnActionPerformed
 
     private void piniaMenosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piniaMenosBtnActionPerformed
-        cantPinias = restarCant(cantPinias);
-        cantidades(cantPinias, piniaCont);
+        if (this.cantPinias > 0){
+            this.cantPinias--;
+        }
+        cantidades(this.cantPinias, piniaCont);
     }//GEN-LAST:event_piniaMenosBtnActionPerformed
 
     private void gomMasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gomMasBtnActionPerformed
-        cantGoms = añadirCant(cantGoms);
-        cantidades(cantGoms, gomCont);
+        this.cantGoms++;
+        cantidades(this.cantGoms, gomCont);
     }//GEN-LAST:event_gomMasBtnActionPerformed
 
     private void gomMenosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gomMenosBtnActionPerformed
-        cantGoms = restarCant(cantGoms);
-        cantidades(cantGoms, gomCont);
+        if (this.cantGoms > 0){
+            this.cantGoms--;
+        }
+        cantidades(this.cantGoms, gomCont);
     }//GEN-LAST:event_gomMenosBtnActionPerformed
 
     private void panMasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panMasBtnActionPerformed
-        cantPanes = añadirCant(cantPanes);
-        cantidades(cantPanes, panCont);
+        this.cantPanes++;
+        cantidades(this.cantPanes, panCont);
     }//GEN-LAST:event_panMasBtnActionPerformed
 
     private void panMenosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panMenosBtnActionPerformed
-        cantPanes = restarCant(cantPanes);
-        cantidades(cantPanes, panCont);
+        if (this.cantPanes > 0){
+            this.cantPanes--;
+        }
+        cantidades(this.cantPanes, panCont);
     }//GEN-LAST:event_panMenosBtnActionPerformed
 
     private void cafeMasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cafeMasBtnActionPerformed
-        cantCafe = añadirCant(cantCafe);
-        cantidades(cantCafe, cafeCont);
+        this.cantCafe++;
+        cantidades(this.cantCafe, cafeCont);
     }//GEN-LAST:event_cafeMasBtnActionPerformed
 
     private void cafeMenosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cafeMenosBtnActionPerformed
-        cantCafe = restarCant(cantCafe);
-        cantidades(cantCafe, cafeCont);
+        if (this.cantCafe > 0){
+            this.cantCafe--;
+        }
+        cantidades(this.cantCafe, cafeCont);
     }//GEN-LAST:event_cafeMenosBtnActionPerformed
 
     private void teMasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teMasBtnActionPerformed
-        cantTe = añadirCant(cantTe);
-        cantidades(cantTe, teCont);
+        this.cantTe++;
+        cantidades(this.cantTe, teCont);
     }//GEN-LAST:event_teMasBtnActionPerformed
 
     private void teMenosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teMenosBtnActionPerformed
-        cantTe = restarCant(cantTe);
-        cantidades(cantTe, teCont);
+        if (this.cantTe > 0){
+            this.cantTe--;
+        }
+        cantidades(this.cantTe, teCont);
     }//GEN-LAST:event_teMenosBtnActionPerformed
 
     private void jabMasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jabMasBtnActionPerformed
-        cantJbns = añadirCant(cantJbns);
-        cantidades(cantJbns, jabonCont);
+        this.cantJbns++;
+        cantidades(this.cantJbns, jabonCont);
     }//GEN-LAST:event_jabMasBtnActionPerformed
 
     private void jabMenosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jabMenosBtnActionPerformed
-        cantJbns = restarCant(cantJbns);
-        cantidades(cantJbns, jabonCont);
+        if (this.cantJbns > 0){
+            this.cantJbns--;
+        }
+        cantidades(this.cantJbns, jabonCont);
     }//GEN-LAST:event_jabMenosBtnActionPerformed
 
     private void bisuMasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bisuMasBtnActionPerformed
-        cantBisu = añadirCant(cantBisu);
-        cantidades(cantBisu, bisuCont);
+        this.cantBisu++;
+        cantidades(this.cantBisu, bisuCont);
     }//GEN-LAST:event_bisuMasBtnActionPerformed
 
     private void bisuMenosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bisuMenosBtnActionPerformed
-        cantBisu = restarCant(cantBisu);
-        cantidades(cantBisu, bisuCont);
+        if (this.cantBisu > 0){
+            this.cantBisu--;
+        }
+        cantidades(this.cantBisu, bisuCont);
     }//GEN-LAST:event_bisuMenosBtnActionPerformed
 
     public void cantidades (int cant, JLabel label){
         String cantidad = Integer.toString(cant);
         label.setText(cantidad);
     }
-    
-    public int añadirCant (int cant){
-        return cant + 1;
-    }
-    
-    public int restarCant (int cant){
-        if (cant > 0){
-            return cant - 1;
-        }
-        return cant;
+   
+    public void setGestorPedidos(GestorPedido gestor) {
+        this.gestor = gestor;
     }
 
+    //setter para el Pedido (llamar a este metodo cuando haya un pedido nuevo)
+    public void setPedido(Pedido pedido) {
+        this.pedidoActual = pedido;
+    }
+    public void resetNuevoCliente() {
+        this.cantPies = 0;
+        this.cantPinias = 0;
+        this.cantGoms = 0;
+        this.cantPanes = 0;
+        this.cantCafe = 0;
+        this.cantTe = 0;
+        this.cantJbns = 0;
+        this.cantBisu = 0;
+        this.pieCont.setText("0");
+        this.piniaCont.setText("0");
+        this.gomCont.setText("0");
+        this.panCont.setText("0");
+        this.cafeCont.setText("0");
+        this.teCont.setText("0");
+        this.jabonCont.setText("0");
+        this.bisuCont.setText("0");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bisuCont;
     private javax.swing.JLabel bisuLbl;

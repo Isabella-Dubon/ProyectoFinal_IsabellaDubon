@@ -3,14 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/GUI/Main.java</file>
-            <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/GUI/ElegirUser.java</file>
-            <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/GUI/Inicio.java</file>
-            <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/GUI/UsuarioNew.java</file>
+            <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/Factura.java</file>
+            <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/MiniTienda_IsabellaDubon.java</file>
+            <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/Pedido.java</file>
             <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/Producto.java</file>
             <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/Usuario.java</file>
-            <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/Pedido.java</file>
+            <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/GUI/ElegirUser.java</file>
+            <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/GUI/Inicio.java</file>
+            <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/GUI/Main.java</file>
             <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/GUI/PantallaMain.java</file>
+            <file>file:/C:/Users/miria/OneDrive/Documentos/NetBeansProjects/MiniTienda_IsabellaDubon/src/minitienda_isabelladubon/GUI/PantallaPedido.java</file>
         </group>
     </open-files>
 </project-private>

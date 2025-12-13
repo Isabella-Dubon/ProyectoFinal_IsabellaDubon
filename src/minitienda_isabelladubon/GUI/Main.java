@@ -9,27 +9,34 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import minitienda_isabelladubon.Usuario;
 import minitienda_isabelladubon.GUI.PantallaMain;
+import minitienda_isabelladubon.GestorPedido;
+import minitienda_isabelladubon.Pedido;
 import minitienda_isabelladubon.Producto;
+import java.util.Random;
 
 /**
  *
  * @author miria
  */
 public class Main extends javax.swing.JFrame {
+    Random random = new Random();
     private ArrayList<Usuario> usuariosLista;
+    private GestorPedido gestor = new GestorPedido();
     private Usuario seleccion; 
     private String diaUser;
     private String dineroUser;
     private Producto[] tienda;
-    PantallaMain principal = new PantallaMain(tienda, seleccion, this);
-    PantallaPedido pedidos = new PantallaPedido(tienda);
+    PantallaMain principal;
+    PantallaPedido pedidos;
+    private int numPedido = 1;
+    private Pedido pedidoActual;
+    private int contClientes = 0;
+    private int maxClientes = random.nextInt(3, 6);
 
     /**
      * Creates new form Main
      */
-    public Main(){
-        initComponents();
-    }
+    
     public Main(ArrayList<Usuario> listaUsuarios, Usuario seleccion, Producto[] tienda) {
         initComponents();
         this.tienda = tienda;
@@ -48,7 +55,8 @@ public class Main extends javax.swing.JFrame {
         double m = seleccion.getDinero();
         dineroUser = Double.toString(m);
         usuarioDineroLbl.setText(dineroUser);
-        
+        principal = new PantallaMain(tienda, seleccion, this);
+        pedidos = new PantallaPedido(tienda, seleccion, principal, this);
         setDefaultCloseOperation(ElegirUser.DISPOSE_ON_CLOSE);
     }
 
@@ -315,10 +323,14 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_pedidoBtnActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-    principal.setTienda(tienda);
-    principal.setSeleccion(seleccion);
-    principal.alAbrirMain();
-    MostrarPanel(principal);
+        regenerarPedido(seleccion, tienda, numPedido);
+        principal.setPedido(this.pedidoActual);
+        pedidos.setPedido(this.pedidoActual);
+        pedidos.setGestorPedidos(gestor);
+        principal.setTienda(tienda);
+        principal.setSeleccion(seleccion);
+        principal.alAbrirMain();
+        MostrarPanel(principal);
     }//GEN-LAST:event_formWindowOpened
 
     private void principalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_principalBtnActionPerformed
@@ -340,6 +352,32 @@ public class Main extends javax.swing.JFrame {
         usuarioDiaLbl.setText(diaCadena);
     }
     
+    public int getNumPedido(){
+        return this.numPedido;
+    }
+    
+    public void regenerarPedido(Usuario usuario, Producto[] tienda, int numPedido){
+        if (this.gestor != null) {
+            Pedido nuevoPedido = this.gestor.generarPedido(usuario, tienda, numPedido);
+            this.pedidoActual = nuevoPedido; 
+        }
+    }
+    
+    public void avanzarASiguienteCliente() {
+        this.numPedido++;
+        this.contClientes++;
+    
+        this.regenerarPedido(this.seleccion, this.tienda, this.numPedido); 
+        this.principal.setPedido(this.pedidoActual); 
+        this.pedidos.setPedido(this.pedidoActual);
+        this.pedidos.resetNuevoCliente();
+        this.principal.alAbrirMain();
+        if (this.contClientes == this.maxClientes) {
+            this.principal.getBotonNextCliente().setVisible(false);
+        } else {
+            this.principal.getBotonNextCliente().setVisible(true); 
+    }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Nivel;
     private javax.swing.JPanel contenido;

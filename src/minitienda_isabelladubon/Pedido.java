@@ -43,15 +43,11 @@ public class Pedido {
 
     @Override
     public String toString() {
-        String pedidos = "";
-        String cants = "";
-        for (int i = 0; i < cantidades.size(); i++){
-            cants += cantidades.get(i) + "\n";
-            for (int j = 0; j < pedido.size(); j++){ 
-                pedidos += pedido.get(j).getProducto() + "\n";
-            }
+        String resultado = "";
+        for (int i = 0; i < pedido.size(); i++){
+            resultado += pedido.get(i).getProducto() + " " + cantidades.get(i) + "\n";
         }
-        return cants + " " + pedidos ;
+        return resultado;
     }
 
     

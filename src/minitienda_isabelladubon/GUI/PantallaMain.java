@@ -4,35 +4,32 @@
  */
 package minitienda_isabelladubon.GUI;
 import java.awt.Color;
-import java.util.HashSet;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import java.util.Random;
 import javax.swing.JOptionPane;
-import minitienda_isabelladubon.MiniTienda_IsabellaDubon;
+import minitienda_isabelladubon.Pedido;
 import minitienda_isabelladubon.Producto;
 import minitienda_isabelladubon.Usuario;
 
 public class PantallaMain extends javax.swing.JPanel {
     Random random = new Random();
-    MiniTienda_IsabellaDubon logica = new MiniTienda_IsabellaDubon();
     private Producto[] tienda;
     private Usuario seleccion;
-    private int numPedido = 1;
-    private String pedido = "";
-    private int contClientes = 0;
-    private int maxClientes = random.nextInt(3, 6);
     private Main mainFrame;
+    private boolean pedidoEntregado = true;
+    private int numPedido;
+    private Pedido pedidoActual;
     /**
      * Creates new form PantallaMain
      */
-    public PantallaMain(){
-        initComponents();
-    }
+    
     public PantallaMain(Producto[] tienda, Usuario seleccion, Main mainFrame) {
         initComponents();
         this.tienda = tienda;
         this.seleccion = seleccion;
         this.mainFrame = mainFrame;
+        
     }
 
     /**
@@ -164,20 +161,14 @@ public class PantallaMain extends javax.swing.JPanel {
                 cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente4.png")));
                 break;
         }
-        pedido = logica.generarPedido(seleccion, tienda, numPedido).toString(); 
-        pedidoLbl.setText(pedido); //imprime el pedido generado
-        numPedido++; //sube el numero de pedido y muestra en pantalla
+        numPedido = mainFrame.getNumPedido();
         String num = Integer.toString(numPedido);
         pedidoNumLbl.setText(num);
-        contClientes++; //cantidad de clientes atendidos
-        if (contClientes == maxClientes){ //al llegar al max, se sube el num de dia
-            nextCliente.setVisible(false);
-            next.setVisible(true);
-            seleccion.setDiaEnJuego(seleccion.getDiaEnJuego()+1);
-            JOptionPane.showMessageDialog(this, "Has completado el dia :D");
-            JOptionPane.showMessageDialog(this, "Comienza nuevo Dia !");
-            contClientes = 0;
-            mainFrame.actualizarDia();
+        if (this.mainFrame != null) {
+            this.mainFrame.avanzarASiguienteCliente();
+        } else {
+            // Esto solo es útil para depuración en caso de que mainFrame aún sea null
+            System.err.println("Error: mainFrame es null al presionar Next Cliente.");
         }
     }//GEN-LAST:event_nextClienteActionPerformed
 
@@ -211,11 +202,47 @@ public class PantallaMain extends javax.swing.JPanel {
                 cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente4.png")));
                 break;
         }
-        
         //imprime el pedido generado aleatoriamente
-        pedido = logica.generarPedido(seleccion, tienda, numPedido).toString();
-        pedidoLbl.setText(pedido);
+        numPedido = mainFrame.getNumPedido();
+        this.actualizarDisplay();
         next.setVisible(false);
+    }
+    //setter para el Pedido (llamar a este metodo cuando haya un pedido nuevo)
+    public void setPedido(Pedido pedido) {
+        this.pedidoActual = pedido;
+        actualizarDisplay();
+    }
+    
+    public void actualizarDisplay() {
+        if (this.pedidoActual == null) {
+            return;
+        }
+        String display = this.formatearPedido(this.pedidoActual);
+        //actualizar el jlabel
+        pedidoLbl.setText(display);
+    }
+    
+    private String formatearPedido(Pedido pedido){
+        if (pedido == null) {
+            return "<html>Esperando pedido...</html>";
+        }
+        ArrayList<Producto> productos = pedido.getPedido();
+        ArrayList<Integer> cantidades = pedido.getCantidades();
+
+        String resultado = "<html>";
+        for (int i = 0; i < productos.size(); i++) {
+            int cantidad = cantidades.get(i);
+            String nombreProducto = productos.get(i).getProducto();
+            resultado += cantidad + " " + nombreProducto + "<br>"; 
+        }
+
+    resultado += "</html>";
+    
+    return resultado;
+    }
+    
+    public javax.swing.JButton getBotonNextCliente() {
+        return this.nextCliente; // Retorna la referencia al botón
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PedidoLbl;

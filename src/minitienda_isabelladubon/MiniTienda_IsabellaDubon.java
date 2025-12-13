@@ -6,10 +6,6 @@ package minitienda_isabelladubon;
 
 import java.util.ArrayList;
 import minitienda_isabelladubon.GUI.Inicio;
-import minitienda_isabelladubon.GUI.ElegirUser;
-import minitienda_isabelladubon.GUI.UsuarioNew;
-import minitienda_isabelladubon.GUI.Main;
-import minitienda_isabelladubon.GUI.PantallaMain;
 import java.util.Random;
 
 public class MiniTienda_IsabellaDubon {
@@ -25,31 +21,12 @@ public class MiniTienda_IsabellaDubon {
         tienda[5] = new Producto("Cafe","",12,10);
         tienda[6] = new Producto("Jabon Artesanal","",60,10);
         tienda[7] = new Producto("Pulcera","",30,10);
-        
+                
         //Inicializa el menu principal
         Inicio inicio = new Inicio(tienda);
         inicio.setVisible(true);
         inicio.setLocationRelativeTo(null);
         inicio.setResizable(false);
     }
-    
-    public Pedido generarPedido (Usuario usuario, Producto[] tienda, int numPedido){
-        ArrayList<Producto> productos = new ArrayList<>();
-        ArrayList<Integer> cantidad = new ArrayList<>();
-        Random random = new Random();
-        int dia = usuario.getDiaEnJuego();
-        Pedido pedido = null;
-        if (dia < 5){ //dia 1-4, genera solo un tipo de producto, cantidad Max = 3
-            int index1 = random.nextInt(8);
-            Producto producto1 = tienda[index1];
-            productos.add(producto1);
-            int cant = random.nextInt(1, 4);
-            cantidad.add(cant);
-            pedido = new Pedido(productos, cantidad, numPedido);
-        }
-        return pedido;
-    }
-    
-    
     
 }
