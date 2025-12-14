@@ -22,7 +22,7 @@ public class GestorPedido {
         Producto producto1 = tienda[index];
             if (!productos.contains(producto1)){
         productos.add(producto1);
-        //elige una cantidad del producto de forma random
+        //elige una cantidad del producto de forma random 1-3
         int cant = random.nextInt(1, 4);
         cantidad.add(cant);
             }

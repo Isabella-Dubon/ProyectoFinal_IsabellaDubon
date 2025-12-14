@@ -29,6 +29,7 @@ public class Main extends javax.swing.JFrame {
     private Producto[] tienda;
     PantallaMain principal;
     PantallaPedido pedidos;
+    PantallaBusqueda busqueda;
     private int numPedido = 1;
     private Pedido pedidoActual;
     private int contClientes = 0;
@@ -58,6 +59,7 @@ public class Main extends javax.swing.JFrame {
         usuarioDineroLbl.setText(dineroUser);
         principal = new PantallaMain(tienda, seleccion, this);
         pedidos = new PantallaPedido(tienda, seleccion, principal, this);
+        busqueda = new PantallaBusqueda(); 
         setDefaultCloseOperation(ElegirUser.DISPOSE_ON_CLOSE);
     }
 
@@ -76,6 +78,7 @@ public class Main extends javax.swing.JFrame {
         principalBtn = new javax.swing.JButton();
         restockBtn = new javax.swing.JButton();
         restockBtn1 = new javax.swing.JButton();
+        busquedaBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         subTitulo2 = new javax.swing.JLabel();
         titulo = new javax.swing.JLabel();
@@ -145,6 +148,16 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        busquedaBtn.setBackground(new java.awt.Color(60, 1, 1));
+        busquedaBtn.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        busquedaBtn.setForeground(new java.awt.Color(255, 255, 204));
+        busquedaBtn.setText("Busqueda");
+        busquedaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                busquedaBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -159,7 +172,8 @@ public class Main extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pedidoBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(restockBtn1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(restockBtn1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(busquedaBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -176,7 +190,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(restockBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(restockBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(busquedaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(124, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(16, 16, 16)
@@ -380,6 +396,8 @@ public class Main extends javax.swing.JFrame {
             if (tienda[i].getStock() == 0){
                 tienda[i].setStock(8);
                 restocked = true;
+                System.out.println();
+                System.out.println(tienda[i].getProducto()+" restocked: "+tienda[i].getStock());
             }
         }
         if (!restocked){
@@ -394,6 +412,10 @@ public class Main extends javax.swing.JFrame {
         principalBtn.setEnabled(true);
         MostrarPanel(principal);
     }//GEN-LAST:event_restockBtn1ActionPerformed
+
+    private void busquedaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaBtnActionPerformed
+        MostrarPanel(busqueda);
+    }//GEN-LAST:event_busquedaBtnActionPerformed
 
     public void MostrarPanel(JPanel panel){
         contenido.removeAll();
@@ -455,6 +477,7 @@ public class Main extends javax.swing.JFrame {
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Nivel;
+    private javax.swing.JButton busquedaBtn;
     private javax.swing.JPanel contenido;
     private javax.swing.JLabel dia;
     private javax.swing.JLabel dinero;

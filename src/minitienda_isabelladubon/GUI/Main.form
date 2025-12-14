@@ -89,6 +89,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="pedidoBtn" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
                                   <Component id="restockBtn1" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <Component id="busquedaBtn" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -112,7 +113,9 @@
                       <Component id="restockBtn" min="-2" pref="51" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="restockBtn1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="187" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="busquedaBtn" min="-2" pref="51" max="-2" attributes="0"/>
+                      <EmptySpace pref="124" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -191,6 +194,23 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="restockBtn1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="busquedaBtn">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="1" green="1" red="3c" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Bodoni MT Black" size="18" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Busqueda"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="busquedaBtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

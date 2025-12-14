@@ -5,14 +5,24 @@
 package minitienda_isabelladubon;
 
 public class Factura {
+    private int dia;
     private int numFactura;
     private Pedido pedido;
     private double total;
 
-    public Factura(int numFactura, Pedido pedido, double total) {
+    public Factura(int dia, int numFactura, Pedido pedido, double total) {
+        this.dia = dia;
         this.numFactura = numFactura;
         this.pedido = pedido;
         this.total = total;
+    }
+
+    public int getDia() {
+        return dia;
+    }
+
+    public void setDia(int dia) {
+        this.dia = dia;
     }
 
     public int getNumFactura() {
@@ -41,10 +51,7 @@ public class Factura {
 
     @Override
     public String toString() {
-        return "Factura" + "\n" +
-                "Num. : " + numFactura + "\n" +
-                pedido + "\n" +
-                "Total: L. " + total ;
+        return "Dia. : " + dia + "|" + "Num. : " + numFactura + "|" + pedido + "|" + "Total: L. " + total ;
     }
     
     
