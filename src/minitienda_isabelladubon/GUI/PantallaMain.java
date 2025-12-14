@@ -46,7 +46,7 @@ public class PantallaMain extends javax.swing.JPanel {
         pedidoLbl = new javax.swing.JLabel();
         PedidoLbl = new javax.swing.JLabel();
         pedidoNumLbl = new javax.swing.JLabel();
-        next = new javax.swing.JButton();
+        nextDia = new javax.swing.JButton();
         nextCliente = new javax.swing.JButton();
         stand = new javax.swing.JLabel();
         cliente = new javax.swing.JLabel();
@@ -99,16 +99,16 @@ public class PantallaMain extends javax.swing.JPanel {
 
         jPanel1.add(pedidoClientePnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 240, 130));
 
-        next.setBackground(new java.awt.Color(60, 1, 1));
-        next.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
-        next.setForeground(new java.awt.Color(255, 255, 204));
-        next.setText("Siguiente >>");
-        next.addActionListener(new java.awt.event.ActionListener() {
+        nextDia.setBackground(new java.awt.Color(60, 1, 1));
+        nextDia.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        nextDia.setForeground(new java.awt.Color(255, 255, 204));
+        nextDia.setText("Siguiente >>");
+        nextDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextActionPerformed(evt);
+                nextDiaActionPerformed(evt);
             }
         });
-        jPanel1.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, -1, 50));
+        jPanel1.add(nextDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, -1, 50));
 
         nextCliente.setBackground(new java.awt.Color(60, 1, 1));
         nextCliente.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
@@ -166,16 +166,13 @@ public class PantallaMain extends javax.swing.JPanel {
         pedidoNumLbl.setText(num);
         if (this.mainFrame != null) {
             this.mainFrame.avanzarASiguienteCliente();
-        } else {
-            // Esto solo es útil para depuración en caso de que mainFrame aún sea null
-            System.err.println("Error: mainFrame es null al presionar Next Cliente.");
         }
     }//GEN-LAST:event_nextClienteActionPerformed
 
-    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        next.setVisible(false);
+    private void nextDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDiaActionPerformed
+        nextDia.setVisible(false);
         nextCliente.setVisible(true);
-    }//GEN-LAST:event_nextActionPerformed
+    }//GEN-LAST:event_nextDiaActionPerformed
 
     public void setTienda(Producto[] tienda) {
         this.tienda = tienda;
@@ -205,7 +202,7 @@ public class PantallaMain extends javax.swing.JPanel {
         //imprime el pedido generado aleatoriamente
         numPedido = mainFrame.getNumPedido();
         this.actualizarDisplay();
-        next.setVisible(false);
+        nextDia.setVisible(false);
     }
     //setter para el Pedido (llamar a este metodo cuando haya un pedido nuevo)
     public void setPedido(Pedido pedido) {
@@ -249,8 +246,8 @@ public class PantallaMain extends javax.swing.JPanel {
     private javax.swing.JLabel cliente;
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton next;
     private javax.swing.JButton nextCliente;
+    private javax.swing.JButton nextDia;
     private javax.swing.JPanel pedidoClientePnl;
     private javax.swing.JLabel pedidoLbl;
     private javax.swing.JLabel pedidoNumLbl;

@@ -364,13 +364,13 @@ public class Main extends javax.swing.JFrame {
     }
     
     public void avanzarASiguienteCliente() {
+        this.pedidos.resetNuevoCliente();
         this.numPedido++;
         this.contClientes++;
     
         this.regenerarPedido(this.seleccion, this.tienda, this.numPedido); 
         this.principal.setPedido(this.pedidoActual); 
         this.pedidos.setPedido(this.pedidoActual);
-        this.pedidos.resetNuevoCliente();
         this.principal.alAbrirMain();
         if (this.contClientes == this.maxClientes) {
             this.principal.getBotonNextCliente().setVisible(false);

@@ -18,12 +18,13 @@ public class GestorPedido {
         Random random = new Random();
         int cantPedidos = random.nextInt(1, 4);
         while (productos.size() < cantPedidos){
-            int index = random.nextInt(tienda.length);
-            Producto producto1 = tienda[index];
+        int index = random.nextInt(tienda.length);
+        Producto producto1 = tienda[index];
             if (!productos.contains(producto1)){
-                productos.add(producto1);
-                int cant = random.nextInt(1, 4);
-                cantidad.add(cant);
+        productos.add(producto1);
+        //elige una cantidad del producto de forma random
+        int cant = random.nextInt(1, 4);
+        cantidad.add(cant);
             }
             
         }
@@ -39,12 +40,12 @@ public class GestorPedido {
         //obtener los productos y cantidades del pedido ingresado por el usuario
         ArrayList<Producto> productosIngresados = pedidoIngresado.getPedido();
         ArrayList<Integer> cantidadesIngresadas = pedidoIngresado.getCantidades();
-
+        
         boolean correcto = true;
 
         //misma cantidad de productos
         if (pedidoOriginalProductos.size() != productosIngresados.size()) {
-            return false;
+            return false;  //error tamaño diferente
         }
 
         //comparar productos
@@ -61,18 +62,18 @@ public class GestorPedido {
                     
                     //comparar cantidades
                     if (cantidadesIngresadas.get(j) != cantOriginal) {
-                        return false; // Error: Cantidad diferente
-                    }
+                        return false; //error cantidad diferente
+        }
                     break; 
                 }
             }
-            
+    
             if (!encontrado) {
-                return false; // Error: Falta un producto original en la lista ingresada
-            }
+                return false; //si falta un producto original en la lista ingresada
         }
-        
-        return correcto; // Si el loop termina sin retornar false, es correcto.
+        }
+    
+        return correcto; //al terminar sin false, esta correcto
     }
 
 }

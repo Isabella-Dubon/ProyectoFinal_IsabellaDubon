@@ -4,16 +4,17 @@
  */
 package minitienda_isabelladubon;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class Producto {
     private String producto;
     private final String ID;
-    private double precio;
+    private int precio;
     private int stock;
 
     //constructor
-    public Producto(String producto, String ID, double precio, int stock) {
+    public Producto(String producto, int precio, int stock) {
         this.producto = producto;
         this.ID = generarID();
         this.precio = precio;
@@ -29,11 +30,11 @@ public class Producto {
         this.producto = producto;
     }
 
-    public double getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 
@@ -63,6 +64,6 @@ private String generarID(){
                 "Precio: L. " + precio + "\n" +
                 "In Stock: " + stock ;
     }
-    
+
     
 }

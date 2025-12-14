@@ -43,12 +43,6 @@ public class Pedido {
 
     @Override
     public String toString() {
-        String resultado = "";
-        for (int i = 0; i < pedido.size(); i++){
-            resultado += pedido.get(i).getProducto() + " " + cantidades.get(i) + "\n";
-        }
-        return resultado;
+        return cantidades + " " + pedido.get(0).getProducto();
     }
-
-    
 }

@@ -55,11 +55,11 @@ public class PantallaPedido extends javax.swing.JPanel {
         pinia = tienda[1];
         gomitas = tienda[2];
         pan = tienda[3];
-        cafe = tienda[4];
-        te = tienda[5];
+        te = tienda[4];
+        cafe = tienda[5];
         jabon = tienda[6];
         bisu = tienda[7];
-        
+        this.resetNuevoCliente();
     }
 
     /**
@@ -823,37 +823,37 @@ public class PantallaPedido extends javax.swing.JPanel {
         int numPedido = this.pedidoActual.getNumPedido();
         ArrayList<Producto> productos = new ArrayList<>();
         ArrayList<Integer> cantidades = new ArrayList<>();
-        if (cantPies > 0){
-            cantidades.add(cantPies);
-            productos.add(pie);
+        if (this.cantPies > 0){
+            productos.add(this.pie);
+            cantidades.add(this.cantPies);
         }
-        if (cantPinias > 0){
-            cantidades.add(cantPinias);
-            productos.add(pinia);
+        if (this.cantPinias > 0){
+            productos.add(this.pinia);
+            cantidades.add(this.cantPinias);
         }
-        if (cantGoms > 0){
-            cantidades.add(cantGoms);
-            productos.add(gomitas);
+        if (this.cantGoms > 0){
+            productos.add(this.gomitas);
+            cantidades.add(this.cantGoms);
         }
-        if (cantPanes > 0){
-            cantidades.add(cantPanes);
-            productos.add(pan);
+        if (this.cantPanes > 0){
+            productos.add(this.pan);
+            cantidades.add(this.cantPanes);
         }
-        if (cantCafe > 0){
-            cantidades.add(cantCafe);
-            productos.add(cafe);
+        if (this.cantCafe > 0){
+            productos.add(this.cafe);
+            cantidades.add(this.cantCafe);
         }
-        if (cantTe > 0){
-            cantidades.add(cantTe);
-            productos.add(te);
+        if (this.cantTe > 0){
+            productos.add(this.te);
+            cantidades.add(this.cantTe);
         }
-        if (cantJbns > 0){
-            cantidades.add(cantJbns);
-            productos.add(jabon);
+        if (this.cantJbns > 0){
+            productos.add(this.jabon);
+            cantidades.add(this.cantJbns);
         }
-        if (cantBisu > 0){
-            cantidades.add(cantBisu);
-            productos.add(bisu);
+        if (this.cantBisu > 0){
+            productos.add(this.bisu);
+            cantidades.add(this.cantBisu);
         }
         Pedido pedidoIngresado = new Pedido(productos, cantidades, numPedido);
         boolean correcto = gestor.validarEntrega(this.pedidoActual, pedidoIngresado);;
@@ -863,6 +863,7 @@ public class PantallaPedido extends javax.swing.JPanel {
         }else {
             JOptionPane.showMessageDialog(this, "Pedido incorrecto!");
         }
+        this.resetNuevoCliente();
     }//GEN-LAST:event_entregarPedidoActionPerformed
 
     private void pieMasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pieMasBtnActionPerformed
