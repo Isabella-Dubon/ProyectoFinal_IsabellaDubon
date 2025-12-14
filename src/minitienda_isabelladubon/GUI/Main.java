@@ -74,6 +74,8 @@ public class Main extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         pedidoBtn = new javax.swing.JButton();
         principalBtn = new javax.swing.JButton();
+        restockBtn = new javax.swing.JButton();
+        restockBtn1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         subTitulo2 = new javax.swing.JLabel();
         titulo = new javax.swing.JLabel();
@@ -123,13 +125,41 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        restockBtn.setBackground(new java.awt.Color(145, 216, 200));
+        restockBtn.setFont(new java.awt.Font("Bodoni MT Black", 1, 20)); // NOI18N
+        restockBtn.setForeground(new java.awt.Color(60, 1, 1));
+        restockBtn.setText("!Restock!");
+        restockBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restockBtnActionPerformed(evt);
+            }
+        });
+
+        restockBtn1.setBackground(new java.awt.Color(211, 55, 49));
+        restockBtn1.setFont(new java.awt.Font("Bodoni MT Black", 1, 20)); // NOI18N
+        restockBtn1.setForeground(new java.awt.Color(60, 1, 1));
+        restockBtn1.setText("<html> Skip <p> Pedido <html>");
+        restockBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restockBtn1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pedidoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(restockBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pedidoBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(restockBtn1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -142,7 +172,11 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(pedidoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(restockBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(restockBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(187, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(16, 16, 16)
@@ -339,6 +373,28 @@ public class Main extends javax.swing.JFrame {
         MostrarPanel(principal);
     }//GEN-LAST:event_principalBtnActionPerformed
 
+    private void restockBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restockBtnActionPerformed
+        //busca los productos vacios y les resetea el stock
+        boolean restocked = false;
+        for (int i = 0; i < tienda.length; i++){
+            if (tienda[i].getStock() == 0){
+                tienda[i].setStock(8);
+                restocked = true;
+            }
+        }
+        if (!restocked){
+            JOptionPane.showMessageDialog(this, "No hay stock vacio.");
+
+        }
+    }//GEN-LAST:event_restockBtnActionPerformed
+
+    private void restockBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restockBtn1ActionPerformed
+        JOptionPane.showMessageDialog(this, "Usaste un skip! El cliente se fue insatisfecho");
+        avanzarASiguienteCliente();
+        principalBtn.setEnabled(true);
+        MostrarPanel(principal);
+    }//GEN-LAST:event_restockBtn1ActionPerformed
+
     public void MostrarPanel(JPanel panel){
         contenido.removeAll();
         panel.setSize(720, 450);
@@ -376,6 +432,7 @@ public class Main extends javax.swing.JFrame {
     
     public void avanzarASiguienteCliente() {
         this.pedidos.resetNuevoCliente();
+        this.actualizarDia();
         this.numPedido++;
         this.contClientes++;
     
@@ -390,6 +447,7 @@ public class Main extends javax.swing.JFrame {
             this.principal.getLblPedidoDesc().setText("<html> Estamos Cerrados ! <p> ^^ <html>");
             JOptionPane.showMessageDialog(this, "Dar click a Siguiente>> para continuar :D");
             this.principal.getBotonNextDia().setVisible(true);
+            this.seleccion.setDiaEnJuego(seleccion.getDiaEnJuego()+1);
             contClientes = 0;
         } else {
             this.principal.getBotonNextDia().setVisible(false); 
@@ -408,6 +466,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel lempiras;
     private javax.swing.JButton pedidoBtn;
     private javax.swing.JButton principalBtn;
+    private javax.swing.JButton restockBtn;
+    private javax.swing.JButton restockBtn1;
     private javax.swing.JLabel subTitulo1;
     private javax.swing.JLabel subTitulo2;
     private javax.swing.JLabel titulo;

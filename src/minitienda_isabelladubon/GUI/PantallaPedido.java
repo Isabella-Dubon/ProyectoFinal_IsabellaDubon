@@ -825,37 +825,69 @@ public class PantallaPedido extends javax.swing.JPanel {
         if (this.cantPies > 0){
             productos.add(this.pie);
             cantidades.add(this.cantPies);
+            if (cantPies > tienda[0].getStock()){
+                JOptionPane.showMessageDialog(this, "!! Insuficiente stock de pies !! \n Stock: "+ tienda[0].getStock());
+                return;
+            }
         }
         if (this.cantPinias > 0){
             productos.add(this.pinia);
             cantidades.add(this.cantPinias);
+            if (cantPinias > tienda[1].getStock()){
+                JOptionPane.showMessageDialog(this, "!! Insuficiente stock de piñas !! \n Stock: "+ tienda[1].getStock());
+                return;
+            }
         }
         if (this.cantGoms > 0){
             productos.add(this.gomitas);
             cantidades.add(this.cantGoms);
+            if (cantGoms > tienda[2].getStock()){
+                JOptionPane.showMessageDialog(this, "!! Insuficiente stock de gomitas !! \n Stock: "+ tienda[2].getStock());
+                return;
+            }
         }
         if (this.cantPanes > 0){
             productos.add(this.pan);
             cantidades.add(this.cantPanes);
+            if (cantPanes > tienda[3].getStock()){
+                JOptionPane.showMessageDialog(this, "!! Insuficiente stock de pan !! \n Stock: "+ tienda[3].getStock());
+                return;
+            }
         }
         if (this.cantCafe > 0){
             productos.add(this.cafe);
             cantidades.add(this.cantCafe);
+            if (cantCafe > tienda[5].getStock()){
+                JOptionPane.showMessageDialog(this, "!! Insuficiente cafe !! \n Stock: "+ tienda[5].getStock());
+                return;
+            }
         }
         if (this.cantTe > 0){
             productos.add(this.te);
             cantidades.add(this.cantTe);
+            if (cantTe > tienda[4].getStock()){
+                JOptionPane.showMessageDialog(this, "!! Insuficiente te frio !! \n Stock: "+ tienda[4].getStock());
+                return;
+            }
         }
         if (this.cantJbns > 0){
             productos.add(this.jabon);
             cantidades.add(this.cantJbns);
+            if (cantJbns > tienda[6].getStock()){
+                JOptionPane.showMessageDialog(this, "!! Insuficiente stock de jabones !! \n Stock: "+ tienda[6].getStock());
+                return;
+            }
         }
         if (this.cantBisu > 0){
             productos.add(this.bisu);
             cantidades.add(this.cantBisu);
+            if (cantBisu > tienda[7].getStock()){
+                JOptionPane.showMessageDialog(this, "!! Insuficiente stock de pulseras !! \n Stock: "+ tienda[7].getStock());
+                return;
+            }
         }
         Pedido pedidoIngresado = new Pedido(productos, cantidades, numPedido);
-        boolean correcto = gestor.validarEntrega(this.pedidoActual, pedidoIngresado);;
+        boolean correcto = gestor.validarEntrega(this.pedidoActual, pedidoIngresado);
         int total = 0;
         int totalProducto;
         int cantProducto = 0;
@@ -866,17 +898,52 @@ public class PantallaPedido extends javax.swing.JPanel {
         }
         if (correcto) { //si el pedido es correcto, avanza al siguiente pedido, muestra el panel principal y actualiza el dinero ganado
             JOptionPane.showMessageDialog(this, "Pedido entregado correctamente!");
+            if (cantPies <= tienda[0].getStock() && cantPies > 0){
+                tienda[0].setStock(tienda[0].getStock()-cantPies);
+            }
+            if (cantPinias <= tienda[0].getStock() && cantPinias > 0){
+                tienda[1].setStock(tienda[1].getStock()-cantPinias);
+            }
+            if (cantGoms <= tienda[2].getStock() && cantGoms > 0){
+                tienda[2].setStock(tienda[2].getStock()-cantGoms);
+            }
+            if (cantPanes <= tienda[3].getStock() && cantPanes > 0){
+                tienda[3].setStock(tienda[3].getStock()-cantPanes);
+            }
+            if (cantCafe <= tienda[5].getStock() && cantCafe > 0){
+                tienda[5].setStock(tienda[5].getStock()-cantCafe);
+            }
+            if (cantTe <= tienda[4].getStock() && cantTe > 0){
+                tienda[4].setStock(tienda[4].getStock()-cantTe);
+            }
+            if (cantJbns <= tienda[6].getStock() && cantJbns > 0){
+                tienda[6].setStock(tienda[6].getStock()-cantJbns);
+            }
+            if (cantBisu <= tienda[7].getStock() && cantBisu > 0){
+                tienda[7].setStock(tienda[7].getStock()-cantBisu);
+            }
             mainFrame.avanzarASiguienteCliente();
             seleccion.setDinero(seleccion.getDinero()+total);
             mainFrame.actualizarDinero();
             mainFrame.getBotonMain().setEnabled(true);
             mainFrame.MostrarPanel(principal);
         }else {//sino, avanza al siguiente pedido y muestra el panel principal
-            JOptionPane.showMessageDialog(this, "Pedido incorrecto! El cliente se fue insatisfecho");
-            mainFrame.avanzarASiguienteCliente();
-            mainFrame.MostrarPanel(principal);
+            JOptionPane.showMessageDialog(this, "Pedido incorrecto! Intenta de nuevo");
+            resetNuevoCliente();
+            return;
         }
         this.resetNuevoCliente();
+        
+        System.out.println();
+        System.out.println("=====Stocks=====");
+        System.out.println("Pie stock: "+tienda[0].getStock());
+        System.out.println("Pinias stock: "+tienda[1].getStock());
+        System.out.println("Gomitas stock: "+tienda[2].getStock());
+        System.out.println("Pan stock: "+tienda[3].getStock());
+        System.out.println("Te Frio stock: "+tienda[4].getStock());
+        System.out.println("Cafe stock: "+tienda[5].getStock());
+        System.out.println("Jabones stock: "+tienda[6].getStock());
+        System.out.println("Pulseras stock: "+tienda[7].getStock());
     }//GEN-LAST:event_entregarPedidoActionPerformed
 
     private void pieMasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pieMasBtnActionPerformed
