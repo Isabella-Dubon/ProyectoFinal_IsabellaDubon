@@ -14,10 +14,10 @@ public class MiniTienda_IsabellaDubon {
         tienda[1] = new Producto("Mini Pinia Loca",25,10);
         tienda[2] = new Producto("Gomitas Enchiladas",20,10);
         tienda[3] = new Producto("Pan de Minimo",35,10);
-        tienda[4] = new Producto("Te Frio",15,10);
+        tienda[4] = new Producto("Te Frio",20,10);
         tienda[5] = new Producto("Cafe",12,10);
         tienda[6] = new Producto("Jabon Artesanal",60,10);
-        tienda[7] = new Producto("Pulsera",30,10);
+        tienda[7] = new Producto("Pulsera",25,10);
                 
         //Inicializa el menu principal
         Inicio inicio = new Inicio(tienda);

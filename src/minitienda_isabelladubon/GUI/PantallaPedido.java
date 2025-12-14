@@ -218,7 +218,7 @@ public class PantallaPedido extends javax.swing.JPanel {
 
         pieLbl.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         pieLbl.setForeground(new java.awt.Color(0, 0, 0));
-        pieLbl.setText("Pie de Limon");
+        pieLbl.setText("Pie de Limon L.40");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -298,7 +298,7 @@ public class PantallaPedido extends javax.swing.JPanel {
 
         panLbl.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         panLbl.setForeground(new java.awt.Color(0, 0, 0));
-        panLbl.setText("Pan de Minimo");
+        panLbl.setText("Pan de Minimo L.35");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -378,7 +378,7 @@ public class PantallaPedido extends javax.swing.JPanel {
 
         piniaLbl.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         piniaLbl.setForeground(new java.awt.Color(0, 0, 0));
-        piniaLbl.setText("Mini Pinia Loca");
+        piniaLbl.setText("Mini Piña Loca l.25");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -456,9 +456,9 @@ public class PantallaPedido extends javax.swing.JPanel {
         jPanel17.setBackground(new java.awt.Color(145, 216, 200));
         jPanel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        gomsLbl.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        gomsLbl.setFont(new java.awt.Font("Bodoni MT Black", 0, 11)); // NOI18N
         gomsLbl.setForeground(new java.awt.Color(0, 0, 0));
-        gomsLbl.setText("Gomitas Enchiladas");
+        gomsLbl.setText("Gomitas Enchiladas L.20");
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -466,7 +466,7 @@ public class PantallaPedido extends javax.swing.JPanel {
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(gomsLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addComponent(gomsLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -538,7 +538,7 @@ public class PantallaPedido extends javax.swing.JPanel {
 
         bisuLbl.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         bisuLbl.setForeground(new java.awt.Color(0, 0, 0));
-        bisuLbl.setText("Bisuteria");
+        bisuLbl.setText("Bisuteria L.25");
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -616,9 +616,9 @@ public class PantallaPedido extends javax.swing.JPanel {
         jPanel21.setBackground(new java.awt.Color(145, 216, 200));
         jPanel21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jabonLbl.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jabonLbl.setFont(new java.awt.Font("Bodoni MT Black", 0, 11)); // NOI18N
         jabonLbl.setForeground(new java.awt.Color(0, 0, 0));
-        jabonLbl.setText("Jabones Artesanales");
+        jabonLbl.setText("Jabones Artesanales L.60");
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -626,7 +626,7 @@ public class PantallaPedido extends javax.swing.JPanel {
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jabonLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addComponent(jabonLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -698,7 +698,7 @@ public class PantallaPedido extends javax.swing.JPanel {
 
         teLbl.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         teLbl.setForeground(new java.awt.Color(0, 0, 0));
-        teLbl.setText("Te Frio");
+        teLbl.setText("Te Frio L.20");
 
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
@@ -778,7 +778,7 @@ public class PantallaPedido extends javax.swing.JPanel {
 
         cafeLbl.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
         cafeLbl.setForeground(new java.awt.Color(0, 0, 0));
-        cafeLbl.setText("Cafe");
+        cafeLbl.setText("Cafe L.12");
 
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
@@ -820,7 +820,6 @@ public class PantallaPedido extends javax.swing.JPanel {
     }//GEN-LAST:event_nextClienteActionPerformed
 
     private void entregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entregarPedidoActionPerformed
-        int numPedido = this.pedidoActual.getNumPedido();
         ArrayList<Producto> productos = new ArrayList<>();
         ArrayList<Integer> cantidades = new ArrayList<>();
         if (this.cantPies > 0){
@@ -857,11 +856,25 @@ public class PantallaPedido extends javax.swing.JPanel {
         }
         Pedido pedidoIngresado = new Pedido(productos, cantidades, numPedido);
         boolean correcto = gestor.validarEntrega(this.pedidoActual, pedidoIngresado);;
-        
-        if (correcto) {
+        int total = 0;
+        int totalProducto;
+        int cantProducto = 0;
+        for (int i = 0; i < productos.size(); i++){
+            totalProducto = productos.get(i).getPrecio();
+            cantProducto = cantidades.get(i);
+            total += totalProducto * cantProducto;
+        }
+        if (correcto) { //si el pedido es correcto, avanza al siguiente pedido, muestra el panel principal y actualiza el dinero ganado
             JOptionPane.showMessageDialog(this, "Pedido entregado correctamente!");
-        }else {
-            JOptionPane.showMessageDialog(this, "Pedido incorrecto!");
+            mainFrame.avanzarASiguienteCliente();
+            seleccion.setDinero(seleccion.getDinero()+total);
+            mainFrame.actualizarDinero();
+            mainFrame.getBotonMain().setEnabled(true);
+            mainFrame.MostrarPanel(principal);
+        }else {//sino, avanza al siguiente pedido y muestra el panel principal
+            JOptionPane.showMessageDialog(this, "Pedido incorrecto! El cliente se fue insatisfecho");
+            mainFrame.avanzarASiguienteCliente();
+            mainFrame.MostrarPanel(principal);
         }
         this.resetNuevoCliente();
     }//GEN-LAST:event_entregarPedidoActionPerformed

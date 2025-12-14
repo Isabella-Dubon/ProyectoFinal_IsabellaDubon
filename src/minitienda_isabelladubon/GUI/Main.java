@@ -13,6 +13,7 @@ import minitienda_isabelladubon.GestorPedido;
 import minitienda_isabelladubon.Pedido;
 import minitienda_isabelladubon.Producto;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -320,6 +321,7 @@ public class Main extends javax.swing.JFrame {
 
     private void pedidoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoBtnActionPerformed
         MostrarPanel(pedidos);
+        principalBtn.setEnabled(false);
     }//GEN-LAST:event_pedidoBtnActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -352,6 +354,12 @@ public class Main extends javax.swing.JFrame {
         usuarioDiaLbl.setText(diaCadena);
     }
     
+    public void actualizarDinero (){
+        double dinero = seleccion.getDinero();
+        String dineroCadena = Double.toString(dinero);
+        usuarioDineroLbl.setText(dineroCadena);
+    }
+    
     public int getNumPedido(){
         return this.numPedido;
     }
@@ -361,6 +369,9 @@ public class Main extends javax.swing.JFrame {
             Pedido nuevoPedido = this.gestor.generarPedido(usuario, tienda, numPedido);
             this.pedidoActual = nuevoPedido; 
         }
+    }
+    public javax.swing.JButton getBotonMain() {
+        return this.principalBtn; // Retorna la referencia al botón Principal
     }
     
     public void avanzarASiguienteCliente() {
@@ -372,11 +383,17 @@ public class Main extends javax.swing.JFrame {
         this.principal.setPedido(this.pedidoActual); 
         this.pedidos.setPedido(this.pedidoActual);
         this.principal.alAbrirMain();
-        if (this.contClientes == this.maxClientes) {
-            this.principal.getBotonNextCliente().setVisible(false);
+        if (this.contClientes > this.maxClientes) {
+            this.principal.getLblCliente().setVisible(false);
+            this.principal.getLblPedido().setVisible(false);
+            this.principal.getLblPedidoNum().setVisible(false);
+            this.principal.getLblPedidoDesc().setText("<html> Estamos Cerrados ! <p> ^^ <html>");
+            JOptionPane.showMessageDialog(this, "Dar click a Siguiente>> para continuar :D");
+            this.principal.getBotonNextDia().setVisible(true);
+            contClientes = 0;
         } else {
-            this.principal.getBotonNextCliente().setVisible(true); 
-    }
+            this.principal.getBotonNextDia().setVisible(false); 
+        }
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Nivel;

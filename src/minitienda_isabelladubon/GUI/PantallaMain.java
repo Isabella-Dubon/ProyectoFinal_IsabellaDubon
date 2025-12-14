@@ -20,6 +20,7 @@ public class PantallaMain extends javax.swing.JPanel {
     private boolean pedidoEntregado = true;
     private int numPedido;
     private Pedido pedidoActual;
+    private int dia;
     /**
      * Creates new form PantallaMain
      */
@@ -47,7 +48,6 @@ public class PantallaMain extends javax.swing.JPanel {
         PedidoLbl = new javax.swing.JLabel();
         pedidoNumLbl = new javax.swing.JLabel();
         nextDia = new javax.swing.JButton();
-        nextCliente = new javax.swing.JButton();
         stand = new javax.swing.JLabel();
         cliente = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
@@ -110,17 +110,6 @@ public class PantallaMain extends javax.swing.JPanel {
         });
         jPanel1.add(nextDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, -1, 50));
 
-        nextCliente.setBackground(new java.awt.Color(60, 1, 1));
-        nextCliente.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
-        nextCliente.setForeground(new java.awt.Color(255, 255, 204));
-        nextCliente.setText("Siguiente Cliente>>");
-        nextCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextClienteActionPerformed(evt);
-            }
-        });
-        jPanel1.add(nextCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, 50));
-
         stand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/Untitled4_20251209175549.png"))); // NOI18N
         jPanel1.add(stand, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 730, 450));
 
@@ -144,34 +133,17 @@ public class PantallaMain extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nextClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextClienteActionPerformed
-        //genera un png de cliente random cada ronda
-        int numero = random.nextInt(1, 5);
-        switch (numero){
-            case 1:
-                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente1.png")));
-                break;
-            case 2:
-                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente2.png")));
-                break;
-            case 3:
-                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente3.png")));
-                break;
-            case 4:
-                cliente.setIcon(new ImageIcon(getClass().getResource("/minitienda_isabelladubon/Imags/cliente4.png")));
-                break;
-        }
-        numPedido = mainFrame.getNumPedido();
-        String num = Integer.toString(numPedido);
-        pedidoNumLbl.setText(num);
-        if (this.mainFrame != null) {
-            this.mainFrame.avanzarASiguienteCliente();
-        }
-    }//GEN-LAST:event_nextClienteActionPerformed
-
     private void nextDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDiaActionPerformed
         nextDia.setVisible(false);
-        nextCliente.setVisible(true);
+        mainFrame.actualizarDia();
+        cliente.setVisible(true);
+        PedidoLbl.setVisible(true);
+        pedidoNumLbl.setVisible(false);
+        mainFrame.MostrarPanel(this);
+        mainFrame.avanzarASiguienteCliente();
+        actualizarDisplay();
+        JOptionPane.showMessageDialog(this, "Nuevo dia!");
+
     }//GEN-LAST:event_nextDiaActionPerformed
 
     public void setTienda(Producto[] tienda) {
@@ -238,15 +210,31 @@ public class PantallaMain extends javax.swing.JPanel {
     return resultado;
     }
     
-    public javax.swing.JButton getBotonNextCliente() {
-        return this.nextCliente; // Retorna la referencia al botón
+    public javax.swing.JButton getBotonNextDia() {
+        return this.nextDia; // Retorna la referencia al botón
     }
+    
+    public javax.swing.JLabel getLblCliente() {
+        return this.cliente; // Retorna la referencia al cliente png
+    }
+    
+    public javax.swing.JLabel getLblPedido() {
+        return this.PedidoLbl; // Retorna la referencia al lbl "Pedido"
+    }
+    
+    public javax.swing.JLabel getLblPedidoNum() {
+        return this.pedidoNumLbl; // Retorna la referencia al lbl numero de pedido
+    }
+    
+    public javax.swing.JLabel getLblPedidoDesc() {
+        return this.pedidoLbl; // Retorna la referencia al lbl de la lista del pedido
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PedidoLbl;
     private javax.swing.JLabel cliente;
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton nextCliente;
     private javax.swing.JButton nextDia;
     private javax.swing.JPanel pedidoClientePnl;
     private javax.swing.JLabel pedidoLbl;

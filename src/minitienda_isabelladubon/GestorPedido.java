@@ -16,7 +16,7 @@ public class GestorPedido {
         ArrayList<Producto> productos = new ArrayList<>();
         ArrayList<Integer> cantidad = new ArrayList<>();
         Random random = new Random();
-        int cantPedidos = random.nextInt(1, 4);
+        int cantPedidos = random.nextInt(1, 5);
         while (productos.size() < cantPedidos){
         int index = random.nextInt(tienda.length);
         Producto producto1 = tienda[index];
