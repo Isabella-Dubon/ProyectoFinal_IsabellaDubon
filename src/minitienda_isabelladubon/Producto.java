@@ -60,10 +60,7 @@ public class Producto {
     
     @Override
     public String toString() {
-        return producto + "\n" +
-                "ID: " + ID + "\n" +
-                "Precio: L. " + precio + "\n" +
-                "In Stock: " + stock ;
+        return producto + " | " + "ID: " + ID + " | " + "Precio: L. " + precio + " | " + "In Stock: " + stock ;
     }
 
     

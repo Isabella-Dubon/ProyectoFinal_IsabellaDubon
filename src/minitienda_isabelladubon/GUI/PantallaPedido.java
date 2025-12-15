@@ -823,10 +823,11 @@ public class PantallaPedido extends javax.swing.JPanel {
     private void entregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entregarPedidoActionPerformed
         ArrayList<Producto> productos = new ArrayList<>();
         ArrayList<Integer> cantidades = new ArrayList<>();
+        //si alguna cantidad es mayor a 0, la agrega al pedido ingresado
         if (this.cantPies > 0){
             productos.add(this.pie);
             cantidades.add(this.cantPies);
-            if (cantPies > tienda[0].getStock()){
+            if (cantPies > tienda[0].getStock()){ //si la cantidad es mayor al stock, se sale
                 JOptionPane.showMessageDialog(this, "!! Insuficiente stock de pies !! \n Stock: "+ tienda[0].getStock());
                 return;
             }
@@ -887,8 +888,10 @@ public class PantallaPedido extends javax.swing.JPanel {
                 return;
             }
         }
-        Pedido pedidoIngresado = new Pedido(productos, cantidades, numPedido);
+        Pedido pedidoIngresado = new Pedido(productos, cantidades, numPedido); //guarda el pedido ingresador por usuario
         boolean correcto = gestor.validarEntrega(this.pedidoActual, pedidoIngresado);
+        this.seleccion.agregarResultadoPedido(correcto);
+        seleccion.getHistorialPedidos();
         double totalProducto = 0;
         int cantProducto = 0;
         double total = calcularTotal(totalProducto, cantProducto, productos, cantidades);

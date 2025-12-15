@@ -134,6 +134,7 @@ public class PantallaMain extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nextDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextDiaActionPerformed
+        mainFrame.getBotonPedidos().setEnabled(true);
         nextDia.setVisible(false);
         mainFrame.actualizarDia();
         cliente.setVisible(true);
@@ -192,7 +193,7 @@ public class PantallaMain extends javax.swing.JPanel {
     }
     
     private String formatearPedido(Pedido pedido){
-        if (pedido == null) {
+        if (pedido == null) { //si el pedido esta vacio
             return "<html>Esperando pedido...</html>";
         }
         ArrayList<Producto> productos = pedido.getPedido();

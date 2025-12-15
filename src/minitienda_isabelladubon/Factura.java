@@ -51,7 +51,12 @@ public class Factura {
 
     @Override
     public String toString() {
-        return "Dia: " + dia + "|" + "Num. : " + numFactura + "|" + pedido + "|" + "Total: L. " + total ;
+        return "<html> =================================" +
+                "<p> Dia: " + dia + 
+                "<p> Num: " + numFactura + 
+                "<p>" + pedido.getPedido() + 
+                "<p> Total: L. " + total + 
+                "<p> ================================= <html>" ;
     }
     
     

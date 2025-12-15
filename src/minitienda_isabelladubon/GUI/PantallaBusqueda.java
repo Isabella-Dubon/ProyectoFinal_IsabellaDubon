@@ -45,6 +45,7 @@ public class PantallaBusqueda extends javax.swing.JPanel {
         buscarTiendaTxt = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         comandos = new javax.swing.JLabel();
+        comandos1 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -76,19 +77,33 @@ public class PantallaBusqueda extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(211, 55, 49));
 
-        comandos.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
+        comandos.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
         comandos.setForeground(new java.awt.Color(60, 1, 1));
-        comandos.setText("jLabel1");
+        comandos.setText("Comandos:");
+
+        comandos1.setFont(new java.awt.Font("Bodoni MT", 0, 12)); // NOI18N
+        comandos1.setForeground(new java.awt.Color(60, 1, 1));
+        comandos1.setText("<html> Para buscar productos: <p> nombre=x <p> (x es el nombre del producto <p>o parte de el) <p><p> Para buscar facturas por dia: <p> diax <p> (x es el numero de dia) <p><p> Para revisar el historial de <p> pedidos del dia: <p> historial <p> (IMPORTANTE: Solo muestra el historial del mismo dia en el que se busca.)");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(comandos, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comandos, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comandos1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(comandos, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(comandos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comandos1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 190, 280));
@@ -113,10 +128,8 @@ public class PantallaBusqueda extends javax.swing.JPanel {
             String copia = busqueda.replace("dia", "").trim(); //le quita "dia"
             try{
                 int dia = Integer.parseInt(copia);
-                System.out.println("Día buscado: " + dia);
                 boolean hayEnDiaX = false;
                 for (int i = 0; i < facturasUsuario.size(); i++){
-                    System.out.println("Factura " + i + " - Día: " + facturasUsuario.get(i).getDia());
                     if (facturasUsuario.get(i).getDia() == dia){ //imprime las facturas del numero de dia ingresado
                         modeloTienda.addElement(facturasUsuario.get(i).toString());
                         hayEnDiaX = true;
@@ -132,22 +145,55 @@ public class PantallaBusqueda extends javax.swing.JPanel {
             }catch (NumberFormatException numero){ //si el formato falla
                         JOptionPane.showMessageDialog(this, "Formato invalido. Usa: 'dia1', 'dia2', etc.");
                     }
+        }else if (busqueda.contains("nombre=")){
+            modeloTienda.clear(); //borra la lista primero
+            String copia = busqueda.replace("nombre=", "").trim(); //le quita "dia"
+            Producto encontrado = buscarProducto(tienda, copia, 0);
+            if (encontrado != null){
+                modeloTienda.addElement(encontrado.toString());
+            }else{
+                modeloTienda.addElement("Producto no encontrado.");
+            }
+            mostrar.setModel(modeloTienda);
+            mostrar.revalidate();
+            mostrar.repaint();
+        }else if(busqueda.equals("historial")){
+            modeloTienda.clear();
+            boolean[][] historial = this.seleccion.getHistorialPedidos();
+            int total = this.seleccion.getIndicePedido();
+    
+            for (int i = 0; i < total; i++) {
+                String simbolo;
+                if (historial[i][0]) {
+                    simbolo = "Correcto!";  //correcto
+                } else {
+                    simbolo = "Fallo!";  //incorrecto
+                }
+            modeloTienda.addElement("Pedido #" + (i+1) + ": " + simbolo);
+            mostrar.setModel(modeloTienda);
+            mostrar.revalidate();
+            mostrar.repaint();
+            }
         }else{
-            JOptionPane.showMessageDialog(this, "Formato invalido. Usa: 'dia1', 'dia2', etc.");
-        }   
+            JOptionPane.showMessageDialog(this, "Formato invalido. Ej: 'nombre=Pie de Limon' || Usa: 'dia1', 'dia2', etc. || Usa: 'historial'");
+        }
     }//GEN-LAST:event_buscarActionPerformed
 
     private Producto buscarProducto(Producto[] tienda, String nombre, int index){
-        index = 0;
-        if (!tienda[8].getProducto().toLowerCase().trim().equalsIgnoreCase(nombre.toLowerCase().trim())){
+        if (index >= tienda.length){
             return null;
         }
+        if (tienda[index].getProducto().toLowerCase().trim().contains(nombre.toLowerCase().trim())){
+            return tienda[index];
+        }
+        return buscarProducto(tienda,nombre,(index+1));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscar;
     private javax.swing.JTextField buscarTiendaTxt;
     private javax.swing.JLabel comandos;
+    private javax.swing.JLabel comandos1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

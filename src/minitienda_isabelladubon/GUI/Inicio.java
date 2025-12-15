@@ -5,6 +5,7 @@
 package minitienda_isabelladubon.GUI;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import minitienda_isabelladubon.Factura;
 import minitienda_isabelladubon.Producto;
 import minitienda_isabelladubon.Usuario;
@@ -31,7 +32,7 @@ public class Inicio extends javax.swing.JFrame {
         this.tienda = tienda;
         setDefaultCloseOperation(Inicio.DO_NOTHING_ON_CLOSE);
         elegir = new ElegirUser(listaUsuarios, seleccion, tienda);
-        newUser = new UsuarioNew(listaUsuarios, diagramaPedidos, facturas);
+        newUser = new UsuarioNew(listaUsuarios);
     }
 
     /**
@@ -232,7 +233,20 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void comoJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comoJugarActionPerformed
-        
+        JOptionPane.showMessageDialog(this, """
+                                            Al empezar, se muestra un pedido en la pantalla.
+                                            Da click en la ventana 'Pedido' para ingresarlo, pero asegurate de memorizar 
+                                            bien el pedido ya que no podrias volver a la pantalla principal despues!
+                                            Al ingresarlo con los botones + y -, da click en 'Entregar' para hacer la 
+                                            entrega de los productos!
+                                            
+                                            Boton !Restock!: Rellena el stock de cualquier producto que este en 0
+                                            Boton Skip: Se salta el pedido (util cuando no recuerdas el pedido o 
+                                                        algun producto no tiene suficiente stock!)
+                                            Boton Busqueda: Panel de busqueda para facturas, productos o el historial
+                                                            de pedidos del dia!
+                                            
+                                            Avanza por 7 dias para terminar el juego! Buena suerte recaudando dinero :D""");
     }//GEN-LAST:event_comoJugarActionPerformed
 
     private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosActionPerformed

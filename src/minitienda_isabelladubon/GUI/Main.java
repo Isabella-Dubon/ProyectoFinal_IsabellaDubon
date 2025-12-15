@@ -30,6 +30,7 @@ public class Main extends javax.swing.JFrame {
     PantallaMain principal;
     PantallaPedido pedidos;
     PantallaBusqueda busqueda;
+    FinJuego fin;
     private int numPedido = 1;
     private Pedido pedidoActual;
     private int contClientes = 0;
@@ -60,6 +61,7 @@ public class Main extends javax.swing.JFrame {
         principal = new PantallaMain(tienda, seleccion, this);
         pedidos = new PantallaPedido(tienda, seleccion, principal, this);
         busqueda = new PantallaBusqueda(seleccion, tienda); 
+        fin = new FinJuego(this, principal, seleccion);
         setDefaultCloseOperation(ElegirUser.DISPOSE_ON_CLOSE);
     }
 
@@ -403,6 +405,7 @@ public class Main extends javax.swing.JFrame {
                 restocked = true;
                 System.out.println();
                 System.out.println(tienda[i].getProducto()+" restocked: "+tienda[i].getStock());
+                System.out.println("-"+inversionTotal);
             }
         }
         if (!restocked){
@@ -459,25 +462,39 @@ public class Main extends javax.swing.JFrame {
         return this.principalBtn; // Retorna la referencia al botón Principal
     }
     
+    public javax.swing.JButton getBotonPedidos() {
+        return this.pedidoBtn; // Retorna la referencia al botón Principal
+    }
+    
     public void avanzarASiguienteCliente() {
+        this.actualizarDinero();
+        this.actualizarDia();
         this.pedidos.resetNuevoCliente();
         this.actualizarDia();
         this.numPedido++;
         this.contClientes++;
     
         this.regenerarPedido(this.seleccion, this.tienda, this.numPedido); 
+        //manda el pedido a Principal y Pedidos
         this.principal.setPedido(this.pedidoActual); 
         this.pedidos.setPedido(this.pedidoActual);
         this.principal.alAbrirMain();
+        //valida la cant maxima de clientes por dia
         if (this.contClientes > this.maxClientes) {
+            this.pedidos.setEnabled(false);
             this.principal.getLblCliente().setVisible(false);
             this.principal.getLblPedido().setVisible(false);
             this.principal.getLblPedidoNum().setVisible(false);
             this.principal.getLblPedidoDesc().setText("<html> Estamos Cerrados ! <p> ^^ <html>");
             JOptionPane.showMessageDialog(this, "Dar click a Siguiente>> para continuar :D");
             this.principal.getBotonNextDia().setVisible(true);
-            this.seleccion.setDiaEnJuego(seleccion.getDiaEnJuego()+1);
-            contClientes = 0;
+            if (this.seleccion.getDiaEnJuego() < 2){
+                this.seleccion.setDiaEnJuego(seleccion.getDiaEnJuego()+1);
+                contClientes = 0;
+            }else{
+                MostrarPanel(fin);
+                return;
+            }
         } else {
             this.principal.getBotonNextDia().setVisible(false); 
         }

@@ -10,19 +10,21 @@ public class Usuario {
     private String nombre;
     private double dinero;
     private int diaEnJuego;
-    private boolean[][] diagramaPedidos;
+    private boolean[][] historialPedidos;
+    private int indicePedido;
     private ArrayList<Factura> facturas;
 
     public Usuario() {
     }
 
     
-    public Usuario(String nombre, double dinero, int diaEnJuego, boolean[][] diagramaPedidos, ArrayList<Factura> facturas) {
+    public Usuario(String nombre, double dinero, int diaEnJuego) {
         this.nombre = nombre;
         this.dinero = dinero;
         this.diaEnJuego = diaEnJuego;
-        this.diagramaPedidos = diagramaPedidos;
-        this.facturas = facturas;
+        this.facturas = new ArrayList<>();
+        this.historialPedidos = new boolean[100][1];
+        this.indicePedido = 0; 
     }
 
     public String getNombre() {
@@ -49,12 +51,12 @@ public class Usuario {
         this.diaEnJuego = diaEnJuego;
     }
 
-    public boolean[][] getDiagramaPedidos() {
-        return diagramaPedidos;
+    public boolean[][] getHistorialPedidos() {
+        return historialPedidos;
     }
 
-    public void setDiagramaPedidos(boolean[][] diagramaPedidos) {
-        this.diagramaPedidos = diagramaPedidos;
+    public void setHistorialPedidos(boolean[][] diagramaPedidos) {
+        this.historialPedidos = diagramaPedidos;
     }
 
     public ArrayList<Factura> getFacturas() {
@@ -68,7 +70,19 @@ public class Usuario {
     public void agregarFactura(Factura factura) {
         this.facturas.add(factura);
     }
+
+    public int getIndicePedido() {
+        return indicePedido;
+    }
+
+    public void setIndicePedido(int indicePedido) {
+        this.indicePedido = indicePedido;
+    }
     
+    public void vaciarHistorial() {
+        this.historialPedidos = new boolean[100][1];
+        this.indicePedido = 0;
+    }
     @Override
     public String toString() {
         return "Nombre: " + nombre + "\n" +
@@ -76,6 +90,10 @@ public class Usuario {
                 "Dia " + diaEnJuego + "\n" ;
     }
 
+    public void agregarResultadoPedido(boolean correcto) {
+        historialPedidos[indicePedido][0] = correcto;
+        indicePedido++;
+    }
     
     
     
