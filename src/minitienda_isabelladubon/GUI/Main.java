@@ -59,7 +59,7 @@ public class Main extends javax.swing.JFrame {
         usuarioDineroLbl.setText(dineroUser);
         principal = new PantallaMain(tienda, seleccion, this);
         pedidos = new PantallaPedido(tienda, seleccion, principal, this);
-        busqueda = new PantallaBusqueda(); 
+        busqueda = new PantallaBusqueda(seleccion, tienda); 
         setDefaultCloseOperation(ElegirUser.DISPOSE_ON_CLOSE);
     }
 
@@ -77,7 +77,7 @@ public class Main extends javax.swing.JFrame {
         pedidoBtn = new javax.swing.JButton();
         principalBtn = new javax.swing.JButton();
         restockBtn = new javax.swing.JButton();
-        restockBtn1 = new javax.swing.JButton();
+        skipBtn = new javax.swing.JButton();
         busquedaBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         subTitulo2 = new javax.swing.JLabel();
@@ -138,13 +138,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        restockBtn1.setBackground(new java.awt.Color(211, 55, 49));
-        restockBtn1.setFont(new java.awt.Font("Bodoni MT Black", 1, 20)); // NOI18N
-        restockBtn1.setForeground(new java.awt.Color(60, 1, 1));
-        restockBtn1.setText("<html> Skip <p> Pedido <html>");
-        restockBtn1.addActionListener(new java.awt.event.ActionListener() {
+        skipBtn.setBackground(new java.awt.Color(211, 55, 49));
+        skipBtn.setFont(new java.awt.Font("Bodoni MT Black", 1, 20)); // NOI18N
+        skipBtn.setForeground(new java.awt.Color(60, 1, 1));
+        skipBtn.setText("<html> Skip <p> Pedido <html>");
+        skipBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                restockBtn1ActionPerformed(evt);
+                skipBtnActionPerformed(evt);
             }
         });
 
@@ -172,7 +172,7 @@ public class Main extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pedidoBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(restockBtn1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(skipBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(busquedaBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +189,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(restockBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(restockBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(skipBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(busquedaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(124, Short.MAX_VALUE))
@@ -392,9 +392,14 @@ public class Main extends javax.swing.JFrame {
     private void restockBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restockBtnActionPerformed
         //busca los productos vacios y les resetea el stock
         boolean restocked = false;
+        double inversionTotal = 0;
         for (int i = 0; i < tienda.length; i++){
             if (tienda[i].getStock() == 0){
                 tienda[i].setStock(8);
+                
+                double precio = tienda[i].getPrecio();
+                double inversionProd = 8 * precio;
+                inversionTotal += inversionProd;
                 restocked = true;
                 System.out.println();
                 System.out.println(tienda[i].getProducto()+" restocked: "+tienda[i].getStock());
@@ -404,14 +409,16 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No hay stock vacio.");
 
         }
+        seleccion.setDinero(seleccion.getDinero()-inversionTotal);
+        actualizarDinero();
     }//GEN-LAST:event_restockBtnActionPerformed
 
-    private void restockBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restockBtn1ActionPerformed
+    private void skipBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipBtnActionPerformed
         JOptionPane.showMessageDialog(this, "Usaste un skip! El cliente se fue insatisfecho");
         avanzarASiguienteCliente();
         principalBtn.setEnabled(true);
         MostrarPanel(principal);
-    }//GEN-LAST:event_restockBtn1ActionPerformed
+    }//GEN-LAST:event_skipBtnActionPerformed
 
     private void busquedaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaBtnActionPerformed
         MostrarPanel(busqueda);
@@ -490,7 +497,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton pedidoBtn;
     private javax.swing.JButton principalBtn;
     private javax.swing.JButton restockBtn;
-    private javax.swing.JButton restockBtn1;
+    private javax.swing.JButton skipBtn;
     private javax.swing.JLabel subTitulo1;
     private javax.swing.JLabel subTitulo2;
     private javax.swing.JLabel titulo;

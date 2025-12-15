@@ -4,19 +4,25 @@
  */
 package minitienda_isabelladubon;
 
+import java.util.ArrayList;
+
 public class Usuario {
     private String nombre;
     private double dinero;
     private int diaEnJuego;
+    private boolean[][] diagramaPedidos;
+    private ArrayList<Factura> facturas;
 
     public Usuario() {
     }
 
     
-    public Usuario(String nombre, double dinero, int diaEnJuego) {
+    public Usuario(String nombre, double dinero, int diaEnJuego, boolean[][] diagramaPedidos, ArrayList<Factura> facturas) {
         this.nombre = nombre;
         this.dinero = dinero;
         this.diaEnJuego = diaEnJuego;
+        this.diagramaPedidos = diagramaPedidos;
+        this.facturas = facturas;
     }
 
     public String getNombre() {
@@ -43,6 +49,26 @@ public class Usuario {
         this.diaEnJuego = diaEnJuego;
     }
 
+    public boolean[][] getDiagramaPedidos() {
+        return diagramaPedidos;
+    }
+
+    public void setDiagramaPedidos(boolean[][] diagramaPedidos) {
+        this.diagramaPedidos = diagramaPedidos;
+    }
+
+    public ArrayList<Factura> getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(ArrayList<Factura> facturas) {
+        this.facturas = facturas;
+    }
+
+    public void agregarFactura(Factura factura) {
+        this.facturas.add(factura);
+    }
+    
     @Override
     public String toString() {
         return "Nombre: " + nombre + "\n" +

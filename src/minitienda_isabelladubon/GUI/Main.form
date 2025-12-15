@@ -88,7 +88,7 @@
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="pedidoBtn" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="restockBtn1" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <Component id="skipBtn" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
                                   <Component id="busquedaBtn" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -112,7 +112,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="restockBtn" min="-2" pref="51" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="restockBtn1" min="-2" max="-2" attributes="0"/>
+                      <Component id="skipBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="busquedaBtn" min="-2" pref="51" max="-2" attributes="0"/>
                       <EmptySpace pref="124" max="32767" attributes="0"/>
@@ -179,7 +179,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="restockBtnActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="restockBtn1">
+            <Component class="javax.swing.JButton" name="skipBtn">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="31" green="37" red="d3" type="rgb"/>
@@ -193,7 +193,7 @@
                 <Property name="text" type="java.lang.String" value="&lt;html&gt; Skip &lt;p&gt; Pedido &lt;html&gt;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="restockBtn1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="skipBtnActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="busquedaBtn">

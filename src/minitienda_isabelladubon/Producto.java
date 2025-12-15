@@ -10,11 +10,11 @@ import java.util.Random;
 public class Producto {
     private String producto;
     private final String ID;
-    private int precio;
+    private double precio;
     private int stock;
 
     //constructor
-    public Producto(String producto, int precio, int stock) {
+    public Producto(String producto, double precio, int stock) {
         this.producto = producto;
         this.ID = generarID();
         this.precio = precio;
@@ -30,7 +30,7 @@ public class Producto {
         this.producto = producto;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
@@ -45,7 +45,8 @@ public class Producto {
     public void setStock(int stock) {
         this.stock = stock;
     }
-private String generarID(){
+    
+    private String generarID(){
         Random random = new Random();
         String IDgenerado = "";
         for (int i = 0; i <= 8; i++){ //genera un codigo random de 8 numeros
@@ -56,7 +57,7 @@ private String generarID(){
     public String getID() {
         return ID;
     }
-
+    
     @Override
     public String toString() {
         return producto + "\n" +

@@ -15,7 +15,7 @@ public class MiniTienda_IsabellaDubon {
         tienda[2] = new Producto("Gomitas Enchiladas",20,6);
         tienda[3] = new Producto("Pan de Minimo",35,6);
         tienda[4] = new Producto("Te Frio",20,6);
-        tienda[5] = new Producto("Cafe",12,6);
+        tienda[5] = new Producto("Cafe",12.5,6);
         tienda[6] = new Producto("Jabon Artesanal",60,6);
         tienda[7] = new Producto("Pulsera",25,6);
                 

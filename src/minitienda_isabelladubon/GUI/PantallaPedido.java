@@ -7,6 +7,7 @@ package minitienda_isabelladubon.GUI;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import minitienda_isabelladubon.Factura;
 import minitienda_isabelladubon.GestorPedido;
 import minitienda_isabelladubon.Pedido;
 import minitienda_isabelladubon.Producto;
@@ -888,16 +889,15 @@ public class PantallaPedido extends javax.swing.JPanel {
         }
         Pedido pedidoIngresado = new Pedido(productos, cantidades, numPedido);
         boolean correcto = gestor.validarEntrega(this.pedidoActual, pedidoIngresado);
-        int total = 0;
-        int totalProducto;
+        double totalProducto = 0;
         int cantProducto = 0;
-        for (int i = 0; i < productos.size(); i++){
-            totalProducto = productos.get(i).getPrecio();
-            cantProducto = cantidades.get(i);
-            total += totalProducto * cantProducto;
-        }
+        double total = calcularTotal(totalProducto, cantProducto, productos, cantidades);
         if (correcto) { //si el pedido es correcto, avanza al siguiente pedido, muestra el panel principal y actualiza el dinero ganado
             JOptionPane.showMessageDialog(this, "Pedido entregado correctamente!");
+            int dia = seleccion.getDiaEnJuego();
+            int numFactura = mainFrame.getNumPedido();
+            Factura facturaNueva = new Factura(dia, numFactura, this.pedidoActual, total);
+            seleccion.agregarFactura(facturaNueva);
             if (cantPies <= tienda[0].getStock() && cantPies > 0){
                 tienda[0].setStock(tienda[0].getStock()-cantPies);
             }
@@ -946,6 +946,15 @@ public class PantallaPedido extends javax.swing.JPanel {
         System.out.println("Pulseras stock: "+tienda[7].getStock());
     }//GEN-LAST:event_entregarPedidoActionPerformed
 
+    private double calcularTotal(double totalProducto, int cantProducto, ArrayList<Producto> productos, ArrayList<Integer> cantidades){
+        double total = 0;
+        for (int i = 0; i < productos.size(); i++){
+            totalProducto = productos.get(i).getPrecio();
+            cantProducto = cantidades.get(i);
+            total += totalProducto * cantProducto;
+        }
+        return total;
+    }
     private void pieMasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pieMasBtnActionPerformed
         this.cantPies++;
         cantidades(this.cantPies, pieCont);

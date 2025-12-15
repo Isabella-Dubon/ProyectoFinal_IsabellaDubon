@@ -6,6 +6,7 @@ package minitienda_isabelladubon.GUI;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import minitienda_isabelladubon.Factura;
 import minitienda_isabelladubon.Usuario;
 
 /**
@@ -14,13 +15,17 @@ import minitienda_isabelladubon.Usuario;
  */
 public class UsuarioNew extends javax.swing.JFrame {
     private ArrayList<Usuario> usuarios;
+    private boolean[][] diagramaPedidos;
+    private ArrayList<Factura> facturas;
     /**
      * Creates new form UsuarioNew
      */
-    public UsuarioNew(ArrayList<Usuario> listaUsuarios) {
+    public UsuarioNew(ArrayList<Usuario> listaUsuarios, boolean[][] diagramaPedidos, ArrayList<Factura> facturas) {
         initComponents();
         setDefaultCloseOperation(UsuarioNew.DISPOSE_ON_CLOSE);
         this.usuarios = listaUsuarios;
+        this.diagramaPedidos = diagramaPedidos;
+        this.facturas = facturas;
     }
 
     /**
@@ -248,7 +253,7 @@ public class UsuarioNew extends javax.swing.JFrame {
             }
         }
         //al pasar las validaciones, agrega el usuario
-        usuarios.add(new Usuario(newUsuario,0.00,1));
+        usuarios.add(new Usuario(newUsuario,0.00,1,diagramaPedidos,facturas));
         JOptionPane.showMessageDialog(this, "Usuario registrado correctamente!");
         
     }//GEN-LAST:event_GuardarActionPerformed

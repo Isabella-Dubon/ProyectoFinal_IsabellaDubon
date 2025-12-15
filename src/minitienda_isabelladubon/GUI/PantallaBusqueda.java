@@ -4,17 +4,29 @@
  */
 package minitienda_isabelladubon.GUI;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import minitienda_isabelladubon.Factura;
+import minitienda_isabelladubon.Producto;
+import minitienda_isabelladubon.Usuario;
+
 /**
  *
  * @author miria
  */
 public class PantallaBusqueda extends javax.swing.JPanel {
-
+    private DefaultListModel<String> modeloTienda = new DefaultListModel<>();
+    private ArrayList<Factura> facturasUsuario = new ArrayList<>();
+    private Usuario seleccion;
+    private Producto[] tienda;
     /**
      * Creates new form PantallaBusqueda
      */
-    public PantallaBusqueda() {
+    public PantallaBusqueda(Usuario seleccion, Producto[] tienda) {
         initComponents();
+        this.seleccion = seleccion;
+        this.tienda = tienda;
     }
 
     /**
@@ -29,10 +41,10 @@ public class PantallaBusqueda extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         buscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jTextField1 = new javax.swing.JTextField();
+        mostrar = new javax.swing.JList<>();
+        buscarTiendaTxt = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        comandos = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -50,37 +62,33 @@ public class PantallaBusqueda extends javax.swing.JPanel {
 
         jScrollPane1.setBackground(new java.awt.Color(253, 202, 51));
 
-        jList1.setBackground(new java.awt.Color(253, 202, 51));
-        jList1.setForeground(new java.awt.Color(60, 1, 1));
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        mostrar.setBackground(new java.awt.Color(253, 202, 51));
+        mostrar.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        mostrar.setForeground(new java.awt.Color(60, 1, 1));
+        jScrollPane1.setViewportView(mostrar);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 480, 280));
 
-        jTextField1.setBackground(new java.awt.Color(60, 1, 1));
-        jTextField1.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 204));
-        jTextField1.setText("jTextField1");
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 40, 500, -1));
+        buscarTiendaTxt.setBackground(new java.awt.Color(60, 1, 1));
+        buscarTiendaTxt.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        buscarTiendaTxt.setForeground(new java.awt.Color(255, 255, 204));
+        jPanel1.add(buscarTiendaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 40, 500, -1));
 
         jPanel2.setBackground(new java.awt.Color(211, 55, 49));
 
-        jLabel1.setForeground(new java.awt.Color(60, 1, 1));
-        jLabel1.setText("jLabel1");
+        comandos.setFont(new java.awt.Font("Bodoni MT", 0, 14)); // NOI18N
+        comandos.setForeground(new java.awt.Color(60, 1, 1));
+        comandos.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+            .addComponent(comandos, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+            .addComponent(comandos, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 190, 280));
@@ -98,17 +106,51 @@ public class PantallaBusqueda extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        
+        facturasUsuario = this.seleccion.getFacturas();
+        String busqueda = buscarTiendaTxt.getText();
+        if (busqueda.contains("dia")){ //si contiene "dia" (ej. "dia 1")
+            modeloTienda.clear(); //borra la lista primero
+            String copia = busqueda.replace("dia", "").trim(); //le quita "dia"
+            try{
+                int dia = Integer.parseInt(copia);
+                System.out.println("Día buscado: " + dia);
+                boolean hayEnDiaX = false;
+                for (int i = 0; i < facturasUsuario.size(); i++){
+                    System.out.println("Factura " + i + " - Día: " + facturasUsuario.get(i).getDia());
+                    if (facturasUsuario.get(i).getDia() == dia){ //imprime las facturas del numero de dia ingresado
+                        modeloTienda.addElement(facturasUsuario.get(i).toString());
+                        hayEnDiaX = true;
+                    }
+                }
+                
+                if (!hayEnDiaX){
+                    modeloTienda.addElement("No hay facturas.");
+                }
+                mostrar.setModel(modeloTienda);
+                mostrar.revalidate();
+                mostrar.repaint();
+            }catch (NumberFormatException numero){ //si el formato falla
+                        JOptionPane.showMessageDialog(this, "Formato invalido. Usa: 'dia1', 'dia2', etc.");
+                    }
+        }else{
+            JOptionPane.showMessageDialog(this, "Formato invalido. Usa: 'dia1', 'dia2', etc.");
+        }   
     }//GEN-LAST:event_buscarActionPerformed
 
+    private Producto buscarProducto(Producto[] tienda, String nombre, int index){
+        index = 0;
+        if (!tienda[8].getProducto().toLowerCase().trim().equalsIgnoreCase(nombre.toLowerCase().trim())){
+            return null;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JTextField buscarTiendaTxt;
+    private javax.swing.JLabel comandos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JList<String> mostrar;
     // End of variables declaration//GEN-END:variables
 }

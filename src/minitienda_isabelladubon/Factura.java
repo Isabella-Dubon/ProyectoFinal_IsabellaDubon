@@ -51,7 +51,7 @@ public class Factura {
 
     @Override
     public String toString() {
-        return "Dia. : " + dia + "|" + "Num. : " + numFactura + "|" + pedido + "|" + "Total: L. " + total ;
+        return "Dia: " + dia + "|" + "Num. : " + numFactura + "|" + pedido + "|" + "Total: L. " + total ;
     }
     
     

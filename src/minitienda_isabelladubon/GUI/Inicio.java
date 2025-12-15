@@ -5,6 +5,7 @@
 package minitienda_isabelladubon.GUI;
 
 import java.util.ArrayList;
+import minitienda_isabelladubon.Factura;
 import minitienda_isabelladubon.Producto;
 import minitienda_isabelladubon.Usuario;
 
@@ -16,9 +17,11 @@ public class Inicio extends javax.swing.JFrame {
     /* variables globales de seleccion de usuario y
         lista de usuarios */
     ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+    boolean[][] diagramaPedidos = new boolean[3][3];
+    ArrayList<Factura> facturas = new ArrayList<>();
     private Producto[] tienda;
     public static Usuario seleccion;
-    UsuarioNew newUser = new UsuarioNew(listaUsuarios);
+    UsuarioNew newUser;
     ElegirUser elegir;
     /**
      * Creates new form Principal
@@ -28,7 +31,7 @@ public class Inicio extends javax.swing.JFrame {
         this.tienda = tienda;
         setDefaultCloseOperation(Inicio.DO_NOTHING_ON_CLOSE);
         elegir = new ElegirUser(listaUsuarios, seleccion, tienda);
-
+        newUser = new UsuarioNew(listaUsuarios, diagramaPedidos, facturas);
     }
 
     /**
